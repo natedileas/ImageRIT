@@ -1,11 +1,15 @@
-def red(image, newval=0):
-    image[:,:,2] = newval
-    return image
+import cv2
 
-def green(image, newval=0):
-    image[:,:,1] = newval
-    return image
+from .Func import Func 
 
-def blue(image, newval=0):
-    image[:,:,0] = newval
-    return image
+def rotate(frame, angle=0):
+    # frame
+    # angle (in degrees)
+    rows, cols = frame.shape[0:2]
+    
+    M = cv2.getRotationMatrix2D((cols/2, rows/2), angle, 1)
+    frame = cv2.warpAffine(frame, M, (cols, rows))
+
+    return frame
+
+effect_functions = {str(key): Func(rotate, key*360/9.) for key in range(9)}

@@ -1,8 +1,18 @@
-from color import red, green, blue
-from filters import rotate
+effect_functions = {}
 
-key2transforms = {'r': red, 'g': green, 'b': blue}
+import importlib
+import glob
+from os.path import dirname, basename, isfile
 
-angle = 0
-key2transforms.update(\
-    {str(key):lambda frame: rotate(frame, key*360/9.) for key in range(9)})
+modules = glob.glob(dirname(__file__)+"/*.py")
+
+for file in [basename(f)[:-3] for f in modules if isfile(f)]:
+    if file == '__init__':
+        continue
+
+    module = importlib.import_module(__name__ + '.' + file)
+
+    if hasattr(module, 'effect_functions'):
+        effect_functions.update(module.effect_functions)
+
+del module, importlib, glob, dirname, basename, isfile, file, modules, f
