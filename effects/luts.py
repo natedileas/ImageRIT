@@ -20,24 +20,21 @@ where in each channel the __ element is:
 3rd: binarization
 
 """
-channels = ['r', 'g', 'b', 'k']
+channels = ['r','g','b','k']
 
 def lut_transforms(image, configuration):
 
-    lut = numpy.zeros((255,3))
-
     for i in range(3):
-        lut[:,:,i] = generate_lut(*configuration[channels[i]])
-        image[:,:,i] = lut[:,:,i][image[:,:,i]]
+        lut = generate_lut(*configuration[channels[i]])
+        image[:,:,i] = lut[image[:,:,i]]
     
-    lut = numpy.where(lut > 255, 255 - lut, lut)
-
-    return lut[image]
+    return image
 
 def generate_lut(magnitude, lowerBound, upperBound, binarize=False):
-    lut = numpy.asarray([x * (upperBound - lowerBound) * magnitude for x in range(255)])
+    slope = ((upperBound - lowerBound) / 255.) * magnitude
+    lut = numpy.asarray([x * slope for x in range(255)])
     
-    if binarize == True:
+    if binarize:
         lut = numpy.where(lut > 128, 255, 0)
 
     return lut

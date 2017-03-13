@@ -1,12 +1,14 @@
 import cv2
 
-def affine(frame, angle=0, scale=1.):
+def affine_transforms(frame, config):
     """
     args:
         frame: image (numpy array)
         angle: rotation angle (in degrees)
         scale: scale factor (scalar)
     """
+    angle = config["rotation"]
+    scale = config["scale"]
 
     rows, cols = frame.shape[0:2]
     

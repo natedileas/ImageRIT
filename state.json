@@ -1,0 +1,15 @@
+{
+    "geometric": {
+        "affine":{
+            "rotation": 0,
+            "scale": 1.0
+        },
+        "warp": [0, 0]
+    },
+    "luts": {
+        "r":[1.0, 0, 255, false],
+        "g":[1.0, 0, 255, false],
+        "b":[1.0, 0, 255, false],
+        "k":[1.0, 0, 255, false]
+    }
+}
