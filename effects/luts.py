@@ -22,7 +22,7 @@ where in each channel the __ element is:
 """
 channels = ['r','g','b','k']
 
-def lut_transforms(image, configuration):
+def apply_luts(image, configuration):
 
     for i in range(3):
         lut = generate_lut(*configuration[channels[i]])

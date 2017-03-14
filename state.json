@@ -11,5 +11,9 @@
         "g":[1.0, 0, 255, false],
         "b":[1.0, 0, 255, false],
         "k":[1.0, 0, 255, false]
+    },
+    "filters":{
+        "face" : false,
+        "underwater" : false
     }
 }

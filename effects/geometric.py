@@ -1,5 +1,11 @@
 import cv2
 
+def apply_geometric(frame, config):
+    affine_frame = affine_transforms(frame, config["affine"])
+    warp_frame = warp(affine_frame, config["warp"])
+
+    return warp_frame
+
 def affine_transforms(frame, config):
     """
     args:
@@ -17,3 +23,6 @@ def affine_transforms(frame, config):
 
     return frame
 
+
+def warp(frame, config):
+    return frame

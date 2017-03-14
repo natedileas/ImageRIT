@@ -2,7 +2,7 @@ import time
 
 import cv2
 
-import effects
+from effects import process
 from gpio.state import get_state
 
 
@@ -26,16 +26,15 @@ def main(camera, config, max_framerate=1/30.):
         # display
         cv2.imshow('Webcam', processed_frame)
         key = cv2.waitKey(15)
+        flush()
 
         while time.time() - start < max_framerate:
             pass
 
-
-def process(frame, state):
-    lut_frame = effects.luts.lut_transforms(frame, state["luts"])
-    affine_frame = effects.geometric.affine_transforms(lut_frame, state["geometric"]["affine"])
-
-    return affine_frame
+def flush():
+    while 1:
+        if cv2.waitKey(1) == -1:
+            break
 
 
 if __name__ == '__main__':
