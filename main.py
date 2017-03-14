@@ -33,7 +33,7 @@ def main(camera, config, max_framerate=1/30.):
 
 def process(frame, state):
     lut_frame = effects.luts.lut_transforms(frame, state["luts"])
-    affine_frame = effects.affine.affine_transforms(lut_frame, state["geometric"]["affine"])
+    affine_frame = effects.geometric.affine_transforms(lut_frame, state["geometric"]["affine"])
 
     return affine_frame
 
