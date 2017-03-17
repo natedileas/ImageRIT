@@ -6,7 +6,7 @@ from effects import process
 from gpio.state import get_state
 
 
-def main(camera, config, max_framerate=1/30.):
+def main(camera, config, max_framerate=1000./30.):
     key = -1
 
     while True:

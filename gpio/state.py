@@ -1,4 +1,4 @@
-import pigpio
+#import pigpio
 import threading
 
 def get_state(config, key=0):
@@ -7,7 +7,7 @@ def get_state(config, key=0):
         return config
     chrkey = chr(key)
     if chrkey in 'Qq':
-        print 'quitting'
+        print('quitting')
         return
 
     elif chrkey in 'rgbk':

@@ -1,6 +1,6 @@
-import luts
-import geometric
-import filters
+from . import luts
+from . import geometric
+from . import filters
 
 def process(frame, state):
     lut_frame = luts.apply_luts(frame, state["luts"])
