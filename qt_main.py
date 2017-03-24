@@ -9,13 +9,15 @@ def main(camID, config):
 
     app = QApplication(sys.argv)
 
-    # set up main display window
-    display = DisplayWindow(camID, config)
-    display.show()
-
     # TODO set up panel window
     control = ControlPanel()
     control.show()
+
+    # set up main display window
+    display = DisplayWindow(camID, config, control.get_state)
+    display.show()
+
+    
 
     sys.exit(app.exec_())
 

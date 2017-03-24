@@ -15,5 +15,31 @@
     "filters":{
         "face" : false,
         "underwater" : false
+    },
+    "qt_lut":{
+        "red":{
+            "mag_r": 0,
+            "upper_r": 0,
+            "lower_r": 0,
+            "binary_r": 0
+        },
+        "blue":{
+            "mag_b": 0,
+            "upper_b": 0,
+            "lower_b": 0,
+            "binary_b": 0
+        },
+        "green":{
+            "mag_g": 0,
+            "upper_g": 0,
+            "lower_g": 0,
+            "binary_g": 0
+        },
+        "black":{
+            "mag_k": 0,
+            "upper_k": 0,
+            "lower_k": 0,
+            "binary_k": 0
+        }
     }
 }
