@@ -1,0 +1,5 @@
+Samsung, Galaxy Tab A, SM-T550
+
+Android 6.0.1, api level 21
+
+ 

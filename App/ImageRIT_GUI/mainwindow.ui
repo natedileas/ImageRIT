@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>641</width>
+    <height>422</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(106, 106, 106);</string>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_6">
+    <item row="0" column="0">
+     <widget class="QGroupBox" name="groupBox">
+      <property name="font">
+       <font>
+        <family>Impact Label</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="title">
+       <string>COLORS</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QFrame" name="red">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 0, 0);
+border-color: rgb(0, 0, 0);
+border-width: 10px;</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::Box</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Sunken</enum>
+         </property>
+         <property name="lineWidth">
+          <number>2</number>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_5">
+          <item row="0" column="0">
+           <widget class="QDial" name="mag">
+            <property name="contextMenuPolicy">
+             <enum>Qt::ActionsContextMenu</enum>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">image: url(:/forground.png);</string>
+            </property>
+            <property name="wrapping">
+             <bool>true</bool>
+            </property>
+            <property name="notchesVisible">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QDial" name="upper">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="wrapping">
+             <bool>true</bool>
+            </property>
+            <property name="notchesVisible">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QDial" name="lower">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="wrapping">
+             <bool>true</bool>
+            </property>
+            <property name="notchesVisible">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QCheckBox" name="binary">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+         </layout>
+         <zorder>binary</zorder>
+         <zorder>lower</zorder>
+         <zorder>upper</zorder>
+         <zorder>mag</zorder>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QFrame" name="blue">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(0, 0, 255);</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::Box</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Sunken</enum>
+         </property>
+         <property name="lineWidth">
+          <number>2</number>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_4">
+          <item row="0" column="0">
+           <widget class="QDial" name="mag_3">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="wrapping">
+             <bool>true</bool>
+            </property>
+            <property name="notchesVisible">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QDial" name="upper_3">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="wrapping">
+             <bool>true</bool>
+            </property>
+            <property name="notchesVisible">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QDial" name="lower_3">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="wrapping">
+             <bool>true</bool>
+            </property>
+            <property name="notchesVisible">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QCheckBox" name="binary_3">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+         </layout>
+         <zorder>binary_3</zorder>
+         <zorder>lower_3</zorder>
+         <zorder>mag_3</zorder>
+         <zorder>upper_3</zorder>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QFrame" name="green">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(0, 255, 0);
+border-color: rgb(0, 0, 0);</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::Box</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Sunken</enum>
+         </property>
+         <property name="lineWidth">
+          <number>2</number>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_3">
+          <item row="0" column="0">
+           <widget class="QDial" name="mag_5">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="wrapping">
+             <bool>true</bool>
+            </property>
+            <property name="notchesVisible">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QDial" name="upper_5">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="wrapping">
+             <bool>true</bool>
+            </property>
+            <property name="notchesVisible">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QDial" name="lower_5">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="wrapping">
+             <bool>true</bool>
+            </property>
+            <property name="notchesVisible">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QCheckBox" name="binary_5">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+         </layout>
+         <zorder>binary_5</zorder>
+         <zorder>lower_5</zorder>
+         <zorder>upper_5</zorder>
+         <zorder>mag_5</zorder>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QFrame" name="black">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(10,10,10);</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::Box</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Sunken</enum>
+         </property>
+         <property name="lineWidth">
+          <number>2</number>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="0" column="0">
+           <widget class="QDial" name="mag_6">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="wrapping">
+             <bool>true</bool>
+            </property>
+            <property name="notchesVisible">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QDial" name="upper_6">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="wrapping">
+             <bool>true</bool>
+            </property>
+            <property name="notchesVisible">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QDial" name="lower_6">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="wrapping">
+             <bool>true</bool>
+            </property>
+            <property name="notchesVisible">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QCheckBox" name="binary_6">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+         </layout>
+         <zorder>upper_6</zorder>
+         <zorder>mag_6</zorder>
+         <zorder>binary_6</zorder>
+         <zorder>lower_6</zorder>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>
