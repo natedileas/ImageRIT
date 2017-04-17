@@ -3,24 +3,26 @@ import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow
 
 from qt_DisplayWindow import DisplayWindow
-from qt_ControlPanel import ControlPanel
+from imagerit_server import Server
 
-def main(camID, config):
+def main(camID):
+
+    hostname = '129.21.52.194'
+    port = 12349
+
+    server = Server(hostname, port)
+    server.start()
 
     app = QApplication(sys.argv)
 
-    # TODO set up panel window
-    control = ControlPanel()
-    control.show()
-
     # set up main display window
-    display = DisplayWindow(camID, config, control.get_state)
+    display = DisplayWindow(camID, server.get_state)
     display.show()
 
-    
-
-    sys.exit(app.exec_())
+    ret = app.exec_()
+    server.join()
+    sys.exit(ret)
 
 
 if __name__ == '__main__':
-    main(0, 'state.json')
+    main(0)

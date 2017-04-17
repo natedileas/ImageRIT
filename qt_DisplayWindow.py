@@ -11,13 +11,12 @@ from qt_CameraWidget import ImageRIT_PyQt
 
 
 class DisplayWindow(QMainWindow):
-    def __init__(self, cameraId, config_file, state_func):
+    def __init__(self, cameraId, state_func):
         QMainWindow.__init__(self)
         self.setupUi()
 
-        self.cam = ImageRIT_PyQt(cameraId, config_file, state_func)
+        self.cam = ImageRIT_PyQt(cameraId, state_func)
         self.cam.newFrame.connect(self.display)
-        #self.cam.start()
 
 
     @QtCore.pyqtSlot(QImage)
