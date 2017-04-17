@@ -1,7 +1,10 @@
 #include "mainwindow.h"
 //#include "setup.h"
 #include "client.h"
+#include "panel.h"
 #include <QApplication>
+#include <QCoreApplication>
+#include <QTime>
 
 int main(int argc, char *argv[])
 {
@@ -13,11 +16,20 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     MainWindow w;
-    w.client.connect(hostname, port);
-    w.client.write(hi);
     w.show();
 
+
+    Panel b;
+    // simulate connecting
+    QTime dieTime= QTime::currentTime().addSecs(1);
+    while (QTime::currentTime() < dieTime)
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+
+    b.client.connect(hostname, port);
+    //b.client.write(hi);
+    w.setCentralWidget(&b);
+
     int ret = a.exec();
-    //client.close();
+    //b.client.close();
     return ret;
 }

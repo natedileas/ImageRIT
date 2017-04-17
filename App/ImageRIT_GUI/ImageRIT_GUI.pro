@@ -25,13 +25,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
     client.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    panel.cpp
 
 HEADERS  += mainwindow.h \
-    client.h
+    client.h \
+    panel.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    panel.ui
 
 CONFIG += mobility
 MOBILITY = 
+
+RESOURCES += \
+    resources.qrc
 

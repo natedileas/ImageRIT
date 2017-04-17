@@ -73,6 +73,6 @@ def receive(sock):
     if len(data) == 0:
         raise RuntimeError('no data recv\'d')
 
-    stuff = data
+    stuff = json.loads(data)
 
     return stuff

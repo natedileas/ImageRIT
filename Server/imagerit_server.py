@@ -2,24 +2,28 @@ import socket
 import threading
 import queue
 from mysocket import SuperSock, send, receive
+import copy
+import effects
 
 class ServerThread(threading.Thread):
-    def __init__(self, sock, queue):
+    def __init__(self, sock, parent):
         super(ServerThread, self).__init__()
         self.sock = sock
         self.serve = threading.Event()
-        self.queue = queue
+        self.parent = parent
+
 
     def join(self, timeout=None):
         self.serve.set()
-        super(DisplayServer, self).join(timeout)
+        super(ServerThread, self).join(timeout)
 
     def run(self):
         while not self.serve.isSet():
             try:
+                response = ''
                 data = receive(self.sock)
-                print(data)
-                #self.queue.put(data)
+                
+                self.parent.set_state(data)
 
                 if data == 'keepalive':
                     response = 'keepalive'
@@ -45,6 +49,9 @@ class Server(threading.Thread):
         self.port = port
         self.serve = threading.Event()
         self.queue = queue.Queue()
+        self.lock = threading.Lock()
+
+        self._state = {}
 
     def join(self, timeout=None):
         self.serve.set()
@@ -61,26 +68,25 @@ class Server(threading.Thread):
             try:
                 (clientsocket, address) = serversocket.accept()
                 clientsocket.setblocking(1)
-                st = ServerThread(clientsocket, self.queue)
+                st = ServerThread(clientsocket, self)
                 st.start()
             except socket.timeout:
                 continue
 
     def get_state(self):
-        return {}
-        l = threading.Lock()
-        l.aquire()
-        s = s.state
-        l.release()
+        with self.lock:        
+            s = copy.deepcopy(self._state)
         return s
 
-    def set_state(self):
-        # take a dictionary
-        # update values of keys
-        # be able to clear a key-value pair
-        # modify a global-state dictionary based on a configuration
-        pass
-
+    def set_state(self, new_dict):
+        # modify a global-state dictionary
+        with self.lock:
+            for key, val in new_dict.items():
+                print(key, val)
+                if val:
+                    self._state[key] = effects.config.config[key]
+                else:
+                    self._state.pop(key, None)
     
 if __name__ == '__main__':
 
