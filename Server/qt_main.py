@@ -1,7 +1,7 @@
 import sys
 import socket
-    
-from PyQt5.QtWidgets import QApplication, QMainWindow
+
+from PyQt5.QtWidgets import QApplication
 
 from qt_DisplayWindow import DisplayWindow
 from Server import Server
@@ -12,7 +12,7 @@ def main(camID):
     ip_address = socket.gethostbyname(hostname)
     port = 12349
 
-    server = Server(ip_address, port)
+    server = Server('129.21.52.194', port)
     server.start()
 
     app = QApplication(sys.argv)
@@ -24,6 +24,7 @@ def main(camID):
     ret = app.exec_()
     server.join()
     sys.exit(ret)
+    
 
 
 if __name__ == '__main__':

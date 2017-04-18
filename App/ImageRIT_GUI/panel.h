@@ -19,8 +19,8 @@ public:
     Client client;
 
 private slots:
-    void on_dial_changed(int value);
-    void on_button_toggled(bool value);
+    void dial_changed(int value);
+    void button_toggled(bool value);
 
 private:
     Ui::Panel *ui;

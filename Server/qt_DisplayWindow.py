@@ -2,10 +2,7 @@ from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtGui import QImage, QPixmap
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow
-
-#from PyQt5 import QtCore
-#import PyQt5.QtCore
-#FramelessWindowHint = PyQt5.QtCore.Qt.FramelessWindowHint
+import PyQt5.QtGui
 
 from qt_CameraWidget import ImageRIT_PyQt
 
@@ -18,6 +15,14 @@ class DisplayWindow(QMainWindow):
         self.cam = ImageRIT_PyQt(cameraId, state_func)
         self.cam.newFrame.connect(self.display)
 
+        self.setWindowIcon(PyQt5.QtGui.QIcon('logo_120x120.png'))
+        self.setWindowTitle('Image @ RIT')
+    
+    def mouseDoubleClickEvent(self, mouseevent):
+        if self.isFullScreen():
+            self.showNormal()
+        else:
+            self.showFullScreen()
 
     @QtCore.pyqtSlot(QImage)
     def display(self, frame):
