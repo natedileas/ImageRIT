@@ -1,16 +1,18 @@
 import sys
+import socket
     
 from PyQt5.QtWidgets import QApplication, QMainWindow
 
 from qt_DisplayWindow import DisplayWindow
-from imagerit_server import Server
+from Server import Server
 
 def main(camID):
 
-    hostname = '129.21.52.194'
+    hostname = socket.gethostname()
+    ip_address = socket.gethostbyname(hostname)
     port = 12349
 
-    server = Server(hostname, port)
+    server = Server(ip_address, port)
     server.start()
 
     app = QApplication(sys.argv)
