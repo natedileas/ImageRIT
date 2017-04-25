@@ -21,6 +21,9 @@ def main(camID):
     display = DisplayWindow(camID, server.get_state)
     display.show()
 
+    # connect server -> display slots
+    server.selfie_time.connect(display.selfie)
+    server.selfie_email.connect(display.email)
     server.status.connect(display.show_msg)
     server.start()
 

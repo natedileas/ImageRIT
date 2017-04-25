@@ -1,6 +1,7 @@
 #include "selfie.h"
 #include "ui_selfie.h"
 #include <QTime>
+#include <QString>
 
 selfie::selfie(QWidget *parent) :
     QWidget(parent),
@@ -22,14 +23,19 @@ void selfie::on_back_clicked()
 
 void selfie::on_selfie_b_clicked()
 {
-    // wait 1 second
-    QTime dieTime= QTime::currentTime().addSecs(1);
+    // send timestamp/command over connection
+    QString send = QString("{\"selfie\":{\"time\":\"%1\"}}").arg(QTime::currentTime().toString());
+    QByteArray msg(send.toUtf8());
+    p->client->write(msg);
+
+    // wait 1 second (JUST AN EXAMPLE)
+    QTime dieTime= QTime::currentTime().addSecs(3);
     while (QTime::currentTime() < dieTime)
         QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 
     // TODO
     // countdown
-    // send timestamp/command over connection
+
     // prompt for email
     // send email over connection
     p->pages->setCurrentIndex(1);

@@ -26,6 +26,7 @@ def receive(sock):
     if len(data) == 0:
         raise RuntimeError('no data recv\'d')
 
+    print (data)
     stuff = json.loads(data)
 
     return stuff
@@ -37,37 +38,53 @@ class ServerThread(threading.Thread):
         self.serve = threading.Event()
         self.parent = parent
 
-
     def join(self, timeout=None):
         self.serve.set()
         super(ServerThread, self).join(timeout)
 
     def run(self):
-        while not self.serve.isSet():
-            try:
-                response = ''
+        try:
+            while not self.serve.isSet():
+            
                 data = receive(self.sock)
                 
-                self.parent.set_state(data)
-
+                response = ''
                 if data == 'keepalive':
                     response = 'keepalive'
-                if data == 'bye':
+                elif data == 'bye':
                     send(self.sock, 'die')
                     self.sock.close()
                     break
+                elif 'selfie' in data:  # expect dict here containing the stuff
 
-                send(self.sock, response)
+                    print(data)
+                    timestamp = data['selfie'].get('time', None)
+                    email = data['selfie'].get('email', None)
 
-            except RuntimeError:
-                self.sock.close()
-                self.parent.status.emit('Disconnected')
-                break
+                    if timestamp:
+                        self.parent.selfie_time.emit(timestamp)
+                    if email:
+                        self.parent.selfie_email.emit(email)
+                else:
+                    self.parent.set_state(data)
+
+                if response:
+                    send(self.sock, response)
+
+        except RuntimeError:
+            pass
+        finally:
+            self.sock.close()
+            self.parent.status.emit('Disconnected')
+
 
 from PyQt5 import QtCore
 
 class Server(threading.Thread, QtCore.QObject):
     status = QtCore.pyqtSignal(str)
+    selfie_time = QtCore.pyqtSignal(str)
+    selfie_email = QtCore.pyqtSignal(str)
+
     def __init__(self, hostname, port):
         threading.Thread.__init__(self)
         QtCore.QObject.__init__(self)
