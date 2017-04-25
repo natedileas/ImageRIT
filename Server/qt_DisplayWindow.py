@@ -31,6 +31,9 @@ class DisplayWindow(QMainWindow):
             QtCore.Qt.KeepAspectRatio, QtCore.Qt.FastTransformation))
         self.ImageLabel.update()
 
+    @QtCore.pyqtSlot(str)
+    def show_msg(self, msg):
+        self.statusBar.showMessage(msg)
 
     # auto generated past this point
     def setupUi(self):

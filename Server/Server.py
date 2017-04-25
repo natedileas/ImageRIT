@@ -61,19 +61,21 @@ class ServerThread(threading.Thread):
 
             except RuntimeError:
                 self.sock.close()
-                self.parent.status.showMessage('Disconnected')
+                self.parent.status.emit('Disconnected')
                 break
 
-class Server(threading.Thread):
-    def __init__(self, hostname, port, status):
-        super(Server, self).__init__()
+from PyQt5 import QtCore
+
+class Server(threading.Thread, QtCore.QObject):
+    status = QtCore.pyqtSignal(str)
+    def __init__(self, hostname, port):
+        threading.Thread.__init__(self)
+        QtCore.QObject.__init__(self)
         self.hostname = hostname
         self.port = port
         self.serve = threading.Event()
         self.queue = queue.Queue()
         self.lock = threading.Lock()
-
-        self.status = status
 
         self._state = {}
 
@@ -82,7 +84,8 @@ class Server(threading.Thread):
         super(Server, self).join(timeout)
 
     def run(self):
-        self.status.showMessage('Disconnected')
+        # temporary disabling; is probaling causing a recursive repair issue, threading related
+        self.status.emit('Disconnected')
         serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         serversocket.bind((self.hostname, self.port))
         serversocket.listen(2)   # 2 connection at a time
@@ -92,7 +95,7 @@ class Server(threading.Thread):
 
             try:
                 (clientsocket, address) = serversocket.accept()
-                self.status.showMessage('Connected')
+                self.status.emit('Connected')
                 clientsocket.setblocking(1)
                 st = ServerThread(clientsocket, self)
                 st.start()

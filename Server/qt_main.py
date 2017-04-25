@@ -9,26 +9,24 @@ from Server import Server
 def main(camID):
 
     hostname = socket.gethostname()
-    ip_address = socket.gethostbyname(hostname)
+    ip_address = socket.gethostbyname_ex(hostname)[2][-1]
     print(hostname, ip_address)
     port = 12349
 
     app = QApplication(sys.argv)
 
-    server = Server('129.21.52.194', port, None)
+    server = Server(ip_address, port)
 
     # set up main display window
     display = DisplayWindow(camID, server.get_state)
     display.show()
 
-    server.status = display.statusBar
+    server.status.connect(display.show_msg)
     server.start()
 
     ret = app.exec_()
     server.join()
     sys.exit(ret)
-    
-
 
 if __name__ == '__main__':
     main(0)
