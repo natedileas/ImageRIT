@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>528</width>
-    <height>371</height>
+    <width>534</width>
+    <height>367</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,6 +16,22 @@
   <property name="styleSheet">
    <string notr="true">background-color: rgb(118, 118, 118);</string>
   </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QPushButton" name="selfie_b">
+     <property name="text">
+      <string>Selfie</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="back">
+     <property name="text">
+      <string>Back</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>

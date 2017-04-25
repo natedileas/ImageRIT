@@ -44,3 +44,8 @@ void Panel::on_server_clicked()
 {
     p->pages->setCurrentIndex(0);
 }
+
+void Panel::on_selfie_clicked()
+{
+    p->pages->setCurrentIndex(2);
+}

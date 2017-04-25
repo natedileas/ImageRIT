@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     Panel *b = new Panel(this);
     pages->addWidget(b);
 
-    selfie *s = new selfie;
+    selfie *s = new selfie(this);
     pages->addWidget(s);
 
     pages->setCurrentIndex(1);

@@ -24,6 +24,8 @@ private slots:
 
     void on_server_clicked();
 
+    void on_selfie_clicked();
+
 private:
     Ui::Panel *ui;
     MainWindow *p;
