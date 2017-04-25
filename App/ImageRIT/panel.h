@@ -2,7 +2,7 @@
 #define PANEL_H
 
 #include <QWidget>
-#include "client.h"
+#include "mainwindow.h"
 
 namespace Ui {
 class Panel;
@@ -22,8 +22,11 @@ private slots:
     void dial_changed(int value);
     void button_toggled(bool value);
 
+    void on_server_clicked();
+
 private:
     Ui::Panel *ui;
+    MainWindow *p;
 };
 
 #endif // PANEL_H

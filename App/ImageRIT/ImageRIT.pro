@@ -26,14 +26,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
     client.cpp \
     mainwindow.cpp \
-    panel.cpp
+    panel.cpp \
+    selfie.cpp \
+    config.cpp
 
 HEADERS  += mainwindow.h \
     client.h \
-    panel.h
+    panel.h \
+    selfie.h \
+    config.h
 
 FORMS    += mainwindow.ui \
-    panel.ui
+    panel.ui \
+    selfie.ui \
+    config.ui
 
 CONFIG += mobility
 MOBILITY = 
