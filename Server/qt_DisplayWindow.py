@@ -15,8 +15,8 @@ class DisplayWindow(QMainWindow):
         self.cam = ImageRIT_PyQt(cameraId, state_func)
         self.cam.newFrame.connect(self.display)
 
-        self.setWindowIcon(PyQt5.QtGui.QIcon('logo_120x120.png'))
-        self.setWindowTitle('Image @ RIT')
+        self.setWindowIcon(PyQt5.QtGui.QIcon('..\logo_120x120.png'))
+        self.setWindowTitle('ImageRIT')
     
     def mouseDoubleClickEvent(self, mouseevent):
         if self.isFullScreen():
@@ -49,7 +49,7 @@ class DisplayWindow(QMainWindow):
         self.setCentralWidget(self.VideoStream)
         self.statusBar = QtWidgets.QStatusBar(self)
         self.statusBar.setStyleSheet("border-top-color: rgb(0, 0, 0);\n"
-"background-color: rgb(0, 0, 0);")
+"background-color: rgb(0, 0, 0);\ncolor: rgb(255, 255, 255);")
         self.statusBar.setObjectName("statusBar")
         self.setStatusBar(self.statusBar)
         #self.setWindowFlags(FramelessWindowHint) 

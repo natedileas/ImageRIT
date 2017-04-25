@@ -61,17 +61,19 @@ class ServerThread(threading.Thread):
 
             except RuntimeError:
                 self.sock.close()
-                print('Connection Closed')
+                self.parent.status.showMessage('Disconnected')
                 break
 
 class Server(threading.Thread):
-    def __init__(self, hostname, port):
+    def __init__(self, hostname, port, status):
         super(Server, self).__init__()
         self.hostname = hostname
         self.port = port
         self.serve = threading.Event()
         self.queue = queue.Queue()
         self.lock = threading.Lock()
+
+        self.status = status
 
         self._state = {}
 
@@ -80,6 +82,7 @@ class Server(threading.Thread):
         super(Server, self).join(timeout)
 
     def run(self):
+        self.status.showMessage('Disconnected')
         serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         serversocket.bind((self.hostname, self.port))
         serversocket.listen(2)   # 2 connection at a time
@@ -89,7 +92,7 @@ class Server(threading.Thread):
 
             try:
                 (clientsocket, address) = serversocket.accept()
-                print('Connected')
+                self.status.showMessage('Connected')
                 clientsocket.setblocking(1)
                 st = ServerThread(clientsocket, self)
                 st.start()
