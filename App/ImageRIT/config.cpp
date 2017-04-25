@@ -24,16 +24,23 @@ void Config::on_reconnect_clicked()
     qint32 port = ui->port->text().toInt();
     // if they are, connect
 
+    //TODO also send server code
+
     qDebug() << QString("%1 %2").arg(hostname, QString::number(port));
 
     if (p->client->connect(hostname, port)){
         // if connect succeeds go to the panel view
-        qDebug() << "in if";
-        p->pages->setCurrentIndex(1);
+        qDebug() << "Connected";
     }
 }
 
 void Config::on_back_clicked()
 {
     p->pages->setCurrentIndex(1);
+}
+
+void Config::on_disconnect_clicked()
+{
+    p->client->disconnect_from_host(true);
+    qDebug() << "Disconnected";
 }

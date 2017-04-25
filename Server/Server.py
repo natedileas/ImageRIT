@@ -51,7 +51,7 @@ class ServerThread(threading.Thread):
                 response = ''
                 if data == 'keepalive':
                     response = 'keepalive'
-                elif data == 'bye':
+                elif 'bye' in data:
                     send(self.sock, 'die')
                     self.sock.close()
                     break

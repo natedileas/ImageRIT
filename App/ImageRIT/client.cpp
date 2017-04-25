@@ -9,6 +9,8 @@ Client::Client(QObject *parent) : QObject(parent)
 
 bool Client::connect(QString host, quint16 port)
 {
+    disconnect_from_host(true);
+
     socket->connectToHost(host, port);
     return socket->waitForConnected();
 }
@@ -23,6 +25,13 @@ bool Client::write(QByteArray data)
     }
     else
         return false;
+}
+
+void Client::disconnect_from_host(bool)
+{
+    write(QByteArray("{\"bye\":0}"));
+    socket->close();
+    socket->disconnectFromHost();
 }
 
 QByteArray IntToArray(qint32 source) //Use qint32 to ensure that the number have 4 bytes

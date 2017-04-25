@@ -22,6 +22,8 @@ private slots:
 
     void on_back_clicked();
 
+    void on_disconnect_clicked();
+
 private:
     Ui::Config *ui;
     MainWindow *p;
