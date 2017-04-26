@@ -24,13 +24,15 @@ void Config::on_reconnect_clicked()
     qint32 port = ui->port->text().toInt();
     // if they are, connect
 
-    //TODO also send server code
-
     qDebug() << QString("%1 %2").arg(hostname, QString::number(port));
 
     if (p->client->connect(hostname, port)){
         // if connect succeeds go to the panel view
         qDebug() << "Connected";
+        // send server code
+        QString message = QString("{\"server\":%1}").arg(ui->servercode->text().toInt());
+        QByteArray msg(message.toUtf8());
+        p->client->write(msg);
     }
 }
 

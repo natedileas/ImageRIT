@@ -24,10 +24,6 @@ void selfie::on_back_clicked()
 void selfie::on_selfie_b_clicked()
 {
     // send timestamp/command over connection
-    QString send = QString("{\"selfie\":{\"time\":\"%1\"}}").arg(QTime::currentTime().toString());
-    QByteArray msg(send.toUtf8());
-    p->client->write(msg);
-
     // wait 1 second (JUST AN EXAMPLE)
     QTime dieTime= QTime::currentTime().addSecs(3);
     while (QTime::currentTime() < dieTime)
@@ -35,8 +31,12 @@ void selfie::on_selfie_b_clicked()
 
     // TODO
     // countdown
-
+    QString send = "{\"selfie\":0}";
+    QByteArray msg(send.toUtf8());
+    p->client->write(msg);
     // prompt for email
     // send email over connection
+
     p->pages->setCurrentIndex(1);
+    // TODO bring up email dialog/page
 }

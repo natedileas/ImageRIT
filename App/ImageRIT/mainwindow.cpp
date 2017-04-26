@@ -11,19 +11,20 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    this->show();
+
     pages = new QStackedWidget;
-    this->setCentralWidget(pages);
 
     Config *c = new Config(this);
     pages->addWidget(c);
+    pages->setCurrentIndex(0);
 
     Panel *b = new Panel(this);
     pages->addWidget(b);
 
     selfie *s = new selfie(this);
     pages->addWidget(s);
-
-    pages->setCurrentIndex(1);
+    this->setCentralWidget(pages);
 
     client = new Client;
 }
