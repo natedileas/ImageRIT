@@ -4,19 +4,30 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow
 import PyQt5.QtGui
 
+import time
+import os
+import threading
+
 from qt_CameraWidget import ImageRIT_PyQt
+from g_api_email import send_async
 
 
 class DisplayWindow(QMainWindow):
+    save_name = os.getcwd() + '\\output\\{0}.png'
+
     def __init__(self, cameraId, state_func):
         QMainWindow.__init__(self)
-        self.setupUi()
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self)
 
         self.cam = ImageRIT_PyQt(cameraId, state_func)
         self.cam.newFrame.connect(self.display)
 
-        self.setWindowIcon(PyQt5.QtGui.QIcon('logo_120x120.png'))
-        self.setWindowTitle('Image @ RIT')
+        self.setWindowIcon(PyQt5.QtGui.QIcon('..\logo_120x120.png'))
+        self.setWindowTitle('ImageRIT')
+
+        # selfie / email variable
+        self._image_name = None
     
     def mouseDoubleClickEvent(self, mouseevent):
         if self.isFullScreen():
@@ -26,19 +37,37 @@ class DisplayWindow(QMainWindow):
 
     @QtCore.pyqtSlot(QImage)
     def display(self, frame):
-        self.ImageLabel.setAlignment(QtCore.Qt.AlignCenter)
-        self.ImageLabel.setPixmap(QPixmap.fromImage(frame).scaled(self.ImageLabel.size(), \
-            QtCore.Qt.KeepAspectRatio, QtCore.Qt.FastTransformation))
-        self.ImageLabel.update()
+        self.ui.ImageLabel.setAlignment(QtCore.Qt.AlignCenter)
+        self.ui.ImageLabel.setPixmap(QPixmap.fromImage(frame).scaled( \
+            self.ui.ImageLabel.size(), QtCore.Qt.KeepAspectRatio, \
+            QtCore.Qt.FastTransformation))
+        self.ui.ImageLabel.update()
 
+    @QtCore.pyqtSlot(str)
+    def show_msg(self, msg):
+        self.ui.statusBar.showMessage(msg)
 
-    # auto generated past this point
-    def setupUi(self):
-        self.setObjectName("MainWindow")
-        self.resize(800, 601)
-        self.setAutoFillBackground(False)
-        self.setStyleSheet("background-color: rgb(243, 110, 33);")
-        self.VideoStream = QtWidgets.QWidget(self)
+    @QtCore.pyqtSlot(dict)
+    def selfie(self, data):
+        self._image_name = self.save_name.format(int(round(time.time())))
+        self.ui.ImageLabel.pixmap().save(self._image_name, "PNG")
+    
+    @QtCore.pyqtSlot(dict)
+    def email(self, data):
+        email = data['email']
+        if self._image_name:
+            threading.Thread(target=lambda:send_async(email, self._image_name)).start()
+        self._image_name = None
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(800, 601)
+        MainWindow.setAutoFillBackground(False)
+        MainWindow.setStyleSheet("background-color: rgb(243, 110, 33);")
+        self.VideoStream = QtWidgets.QWidget(MainWindow)
         self.VideoStream.setObjectName("VideoStream")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.VideoStream)
         self.verticalLayout.setObjectName("verticalLayout")
@@ -46,17 +75,18 @@ class DisplayWindow(QMainWindow):
         self.ImageLabel.setText("")
         self.ImageLabel.setObjectName("ImageLabel")
         self.verticalLayout.addWidget(self.ImageLabel)
-        self.setCentralWidget(self.VideoStream)
-        self.statusBar = QtWidgets.QStatusBar(self)
+        MainWindow.setCentralWidget(self.VideoStream)
+        self.statusBar = QtWidgets.QStatusBar(MainWindow)
         self.statusBar.setStyleSheet("border-top-color: rgb(0, 0, 0);\n"
-"background-color: rgb(0, 0, 0);")
+            "background-color: rgb(0, 0, 0);\n"
+            "color: rgb(255, 255, 255);")
         self.statusBar.setObjectName("statusBar")
-        self.setStatusBar(self.statusBar)
-        #self.setWindowFlags(FramelessWindowHint) 
+        MainWindow.setStatusBar(self.statusBar)
 
-        self.retranslateUi()
-        QtCore.QMetaObject.connectSlotsByName(self)
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-    def retranslateUi(self):
+    def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        self.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+
