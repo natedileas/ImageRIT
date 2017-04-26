@@ -7,7 +7,11 @@ from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
 
-from email import MIMEText
+from email.mime.text import MIMEText
+from email.mime.image import MIMEImage
+from email.mime.multipart import MIMEMultipart
+from email import encoders
+
 import base64
 
 try:
@@ -18,48 +22,67 @@ except ImportError:
 
 # If modifying these scopes, delete your previously saved credentials
 # at ~/.credentials/gmail-python-quickstart.json
-SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
+SCOPES = 'https://mail.google.com/'
 CLIENT_SECRET_FILE = 'client_secret.json'
-APPLICATION_NAME = 'windows'
+APPLICATION_NAME = 'WinServer'
 
-def create_message(sender, to, subject, message_text):
-  """Create a message for an email.
+def create_message(sender, to, subject, html_text, image_file):
+    """Create a message for an email.
 
-  Args:
+    Args:
     sender: Email address of the sender.
     to: Email address of the receiver.
     subject: The subject of the email message.
     message_text: The text of the email message.
 
-  Returns:
+    Returns:
     An object containing a base64url encoded email object.
-  """
-  message = MIMEText(message_text)
-  message['to'] = to
-  message['from'] = sender
-  message['subject'] = subject
-  return {'raw': base64.urlsafe_b64encode(message.as_string())}
+    """
+    msgRoot = MIMEMultipart('alternative')
+    msgRoot['Subject'] = 'Subject'
+    msgRoot['From'] = sender
+    msgRoot['To'] = to
+    msgRoot.preamble = 'This is a multi-part message in MIME format.'
 
+    # Encapsulate the plain and HTML versions of the message body in an
+    # 'alternative' part, so message agents can decide which they want to display.
+    msgAlternative = MIMEMultipart('related')
+    msgText = MIMEText('Here\'s your selfie, and thanks for coming! To learn more, visit www.cis.rit.edu or https://github.com/natedileas/ImageRIT. \n\n - Nate and Ryan')
+    msgRoot.attach(msgText)
+
+    html = MIMEText(html_text, 'html')
+    msgAlternative.attach(html)
+    
+    with open(image_file, 'rb') as f:
+        img = MIMEImage(f.read(), _subtype='png')
+        encoders.encode_base64(img)
+        img.add_header('Content-ID', '<IMAGE>')
+    
+    msgAlternative.attach(img)
+    msgRoot.add_header('Content-Disposition', 'attachment', filename=image_file)
+    msgRoot.attach(msgAlternative)
+
+    return {'raw': base64.urlsafe_b64encode(msgRoot.as_bytes()).decode()}
 
 def send_message(service, user_id, message):
-  """Send an email message.
+    """Send an email message.
 
-  Args:
+    Args:
     service: Authorized Gmail API service instance.
     user_id: User's email address. The special value "me"
     can be used to indicate the authenticated user.
     message: Message to be sent.
 
-  Returns:
+    Returns:
     Sent Message.
-  """
-  try:
+    """
+    #try:
     message = (service.users().messages().send(userId=user_id, body=message)
-               .execute())
-    print 'Message Id: %s' % message['id']
+           .execute())
+    print('Message Id: %s' % message['id'])
     return message
-  except errors.HttpError, error:
-    print 'An error occurred: %s' % error
+    #except Exception as error:
+    #    print('An error occurred: %s' % error)
 
 
 def get_credentials():
@@ -90,30 +113,23 @@ def get_credentials():
         print('Storing credentials to ' + credential_path)
     return credentials
 
-def main():
-    """Shows basic usage of the Gmail API.
-
-    Creates a Gmail API service object and outputs a list of label names
-    of the user's Gmail account.
-    """
+def send_async(email, imagefile):
     credentials = get_credentials()
     http = credentials.authorize(httplib2.Http())
     service = discovery.build('gmail', 'v1', http=http)
 
-    results = service.users().labels().list(userId='me').execute()
-    labels = results.get('labels', [])
+    with open('sample_email.html', 'r') as f:
+        html = f.read()
 
-    if not labels:
-        print('No labels found.')
-    else:
-      print('Labels:')
-      for label in labels:
-        print(label['name'])
+    #html = html.replace('IMAGE', imagefile)
 
+    message = create_message('ImageRIT2017@gmail.com', email, 'subject', html, imagefile)
 
-def send_async(email, imagefile):
-    # TODO write this function for threaded email sending, no feedback
-    pass
+    send_message(service, "me", message)
 
 if __name__ == '__main__':
-    main()
+    # in order to use this properly, you have to go to the google api developers console,
+    # download the client secret, and put it in this directory.
+    # on the first run it will require ui interaction in-browser
+
+    send_async('ndileas@gmail.com', '..\\logo_720x720.png')

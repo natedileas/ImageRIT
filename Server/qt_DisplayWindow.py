@@ -6,6 +6,7 @@ import PyQt5.QtGui
 
 import time
 import os
+import threading
 
 from qt_CameraWidget import ImageRIT_PyQt
 #from g_api_email import send_async
@@ -55,7 +56,7 @@ class DisplayWindow(QMainWindow):
     def email(self, data):
         email = data['email']
         if self._image_name:
-            send_async(email, self._image_name)
+            threading.thread(target=lambda:send_async(email, self._image_name)).start()
         self._image_name = None
 
 from PyQt5 import QtCore, QtGui, QtWidgets
