@@ -8,8 +8,8 @@
 
 int main(int argc, char *argv[])
 {
-    QString hostname = "129.21.52.194";
-    quint16 port = 12349;
+    QString hostname = "Ryans-Laptop.wireless.rit.edu";
+    quint16 port = 34563;
 
     QByteArray hi("keepalive");
 

@@ -13,7 +13,7 @@ def lut(frame, gamma=100, offset=0):
     gamma = gamma if gamma < 1 else 1
     # maps to [-1, 1]
 
-    lut = numpy.asarray([x * gamma for x in range(255)])
+    lut = numpy.asarray([x * gamma for x in range(256)])
     lut += lut.min()
 
     return lut[frame].reshape(frame.shape)

@@ -10,9 +10,9 @@ def main(camID):
 
     hostname = socket.gethostname()
     ip_address = socket.gethostbyname(hostname)
-    port = 12349
+    port = 34563
 
-    server = Server('129.21.52.194', port)
+    server = Server('Ryans-Laptop.wireless.rit.edu', port)
     server.start()
 
     app = QApplication(sys.argv)
