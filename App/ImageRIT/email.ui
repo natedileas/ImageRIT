@@ -63,7 +63,7 @@
          <item>
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>Email Here:</string>
+            <string>Email:</string>
            </property>
           </widget>
          </item>
@@ -71,6 +71,9 @@
           <widget class="QLineEdit" name="email_entry">
            <property name="text">
             <string>ndileas@gmail.com</string>
+           </property>
+           <property name="placeholderText">
+            <string>youremailhere@gmail.com</string>
            </property>
           </widget>
          </item>
@@ -81,6 +84,13 @@
        <widget class="QPushButton" name="emailme">
         <property name="text">
          <string>Email Me My Selfie</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="back">
+        <property name="text">
+         <string>Back</string>
         </property>
        </widget>
       </item>
