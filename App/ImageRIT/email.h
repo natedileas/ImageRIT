@@ -19,6 +19,8 @@ public:
 private slots:
     void on_emailme_clicked();
 
+    void on_back_clicked();
+
 private:
     Ui::Email *ui;
     MainWindow *p;
