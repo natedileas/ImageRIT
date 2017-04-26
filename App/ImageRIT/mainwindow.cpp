@@ -5,6 +5,7 @@
 #include "panel.h"
 #include "config.h"
 #include "selfie.h"
+#include "email.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -24,6 +25,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     selfie *s = new selfie(this);
     pages->addWidget(s);
+
+    Email *e = new Email(this);
+    pages->addWidget(e);
     this->setCentralWidget(pages);
 
     client = new Client;

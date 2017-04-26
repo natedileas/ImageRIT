@@ -28,18 +28,21 @@ SOURCES += main.cpp\
     mainwindow.cpp \
     panel.cpp \
     selfie.cpp \
-    config.cpp
+    config.cpp \
+    email.cpp
 
 HEADERS  += mainwindow.h \
     client.h \
     panel.h \
     selfie.h \
-    config.h
+    config.h \
+    email.h
 
 FORMS    += mainwindow.ui \
     panel.ui \
     selfie.ui \
-    config.ui
+    config.ui \
+    email.ui
 
 CONFIG += mobility
 MOBILITY = 

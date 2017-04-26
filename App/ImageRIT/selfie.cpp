@@ -34,9 +34,6 @@ void selfie::on_selfie_b_clicked()
     QString send = "{\"selfie\":0}";
     QByteArray msg(send.toUtf8());
     p->client->write(msg);
-    // prompt for email
-    // send email over connection
 
-    p->pages->setCurrentIndex(1);
-    // TODO bring up email dialog/page
+    p->pages->setCurrentIndex(3);
 }
