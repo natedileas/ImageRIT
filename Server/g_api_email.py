@@ -111,5 +111,9 @@ def main():
         print(label['name'])
 
 
+def send_async(email, imagefile):
+    # TODO write this function for threaded email sending, no feedback
+    pass
+
 if __name__ == '__main__':
     main()

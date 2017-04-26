@@ -7,6 +7,7 @@ import json
 import effects
 
 MSG_LEN = 4
+CODE = 1111
 
 def send(sock, obj):
     msg = json.dumps(obj)
@@ -14,7 +15,7 @@ def send(sock, obj):
     sock.send((msglen+msg).encode())
 
 def receive(sock):
-    msglen = sock.recv(MSG_LEN)#.decode()
+    msglen = sock.recv(MSG_LEN)
 
     if len(msglen) == 0:
         raise RuntimeError('msglen 0')
@@ -44,6 +45,10 @@ class ServerThread(threading.Thread):
 
     def run(self):
         try:
+            servercode = receive(self.sock)
+            if servercode['server'] != CODE:
+                raise RuntimeError('authentication failed')
+
             while not self.serve.isSet():
             
                 data = receive(self.sock)
@@ -55,16 +60,10 @@ class ServerThread(threading.Thread):
                     send(self.sock, 'die')
                     self.sock.close()
                     break
-                elif 'selfie' in data:  # expect dict here containing the stuff
-
-                    print(data)
-                    timestamp = data['selfie'].get('time', None)
-                    email = data['selfie'].get('email', None)
-
-                    if timestamp:
-                        self.parent.selfie_time.emit(timestamp)
-                    if email:
-                        self.parent.selfie_email.emit(email)
+                elif 'selfie' in data:
+                    self.parent.selfie.emit(data)
+                elif 'email' in data:
+                    self.parent.email.emit(data)
                 else:
                     self.parent.set_state(data)
 
@@ -82,8 +81,8 @@ from PyQt5 import QtCore
 
 class Server(threading.Thread, QtCore.QObject):
     status = QtCore.pyqtSignal(str)
-    selfie_time = QtCore.pyqtSignal(str)
-    selfie_email = QtCore.pyqtSignal(str)
+    selfie = QtCore.pyqtSignal(dict)
+    email = QtCore.pyqtSignal(dict)
 
     def __init__(self, hostname, port):
         threading.Thread.__init__(self)

@@ -4,10 +4,16 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow
 import PyQt5.QtGui
 
+import time
+import os
+
 from qt_CameraWidget import ImageRIT_PyQt
+#from g_api_email import send_async
 
 
 class DisplayWindow(QMainWindow):
+    save_name = os.getcwd() + '\\output\\{0}.png'
+
     def __init__(self, cameraId, state_func):
         QMainWindow.__init__(self)
         self.ui = Ui_MainWindow()
@@ -18,6 +24,9 @@ class DisplayWindow(QMainWindow):
 
         self.setWindowIcon(PyQt5.QtGui.QIcon('..\logo_120x120.png'))
         self.setWindowTitle('ImageRIT')
+
+        # selfie / email variable
+        self._image_name = None
     
     def mouseDoubleClickEvent(self, mouseevent):
         if self.isFullScreen():
@@ -28,28 +37,26 @@ class DisplayWindow(QMainWindow):
     @QtCore.pyqtSlot(QImage)
     def display(self, frame):
         self.ui.ImageLabel.setAlignment(QtCore.Qt.AlignCenter)
-        self.ui.ImageLabel.setPixmap(QPixmap.fromImage(frame).scaled(self.ui.ImageLabel.size(), \
-            QtCore.Qt.KeepAspectRatio, QtCore.Qt.FastTransformation))
+        self.ui.ImageLabel.setPixmap(QPixmap.fromImage(frame).scaled( \
+            self.ui.ImageLabel.size(), QtCore.Qt.KeepAspectRatio, \
+            QtCore.Qt.FastTransformation))
         self.ui.ImageLabel.update()
 
     @QtCore.pyqtSlot(str)
     def show_msg(self, msg):
         self.ui.statusBar.showMessage(msg)
 
-
-    @QtCore.pyqtSlot(str)
-    def selfie(self, time):
-        #delta = time - current  # TODO use timestamp
-        QtCore.QTimer.singleShot(3000, self.save)
-
-    @QtCore.pyqtSlot(str)
-    def email(self, email):
-        print ('email')
-
-    @QtCore.pyqtSlot()
-    def save(self):
-        # save this image
-        p = self.ui.ImageLabel.pixmap().save("C:\\Users\\Natethegreat\\Code\\filename.jpg", "JPG")
+    @QtCore.pyqtSlot(dict)
+    def selfie(self, data):
+        self._image_name = self.save_name.format(int(round(time.time())))
+        self.ui.ImageLabel.pixmap().save(self._image_name, "PNG")
+    
+    @QtCore.pyqtSlot(dict)
+    def email(self, data):
+        email = data['email']
+        if self._image_name:
+            send_async(email, self._image_name)
+        self._image_name = None
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
