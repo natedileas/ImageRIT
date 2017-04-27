@@ -33,17 +33,20 @@ def receive(sock):
     return stuff
 
 class ServerThread(threading.Thread):
-    def __init__(self, sock, parent):
+    def __init__(self, sock, parent, index):
         super(ServerThread, self).__init__()
         self.sock = sock
         self.serve = threading.Event()
         self.parent = parent
+        self.tname = index
 
     def join(self, timeout=None):
+        self.sock.send(b'')
         self.serve.set()
         super(ServerThread, self).join(timeout)
 
     def run(self):
+        self.parent.status.emit('Connected: {0}'.format(self.tname))
         try:
             servercode = receive(self.sock)
             if servercode['server'] != CODE:
@@ -73,8 +76,7 @@ class ServerThread(threading.Thread):
         except RuntimeError:
             pass
         finally:
-
-            self.parent.status.emit('Disconnected: {0}'.format(self.sock.getpeeraddress()))
+            self.parent.status.emit('Disconnected: {0}'.format(self.tname))
             self.sock.close()
 
 
@@ -96,13 +98,14 @@ class Server(threading.Thread, QtCore.QObject):
         self.lock = threading.Lock()
 
         self._state = {}
+        self.index = 0
 
     def join(self, timeout=None):
         self.serve.set()
         super(Server, self).join(timeout)
 
     def run(self):
-        self.status.emit('Disconnected')
+        #self.status.emit('Disconnected')
         serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         serversocket.bind((self.hostname, self.port))
         serversocket.listen(2)   # 2 connection at a time
@@ -112,10 +115,11 @@ class Server(threading.Thread, QtCore.QObject):
 
             try:
                 (clientsocket, address) = serversocket.accept()
-                self.status.emit('Connected: {0}'.format(clientsocket.getpeeraddress()))
                 clientsocket.setblocking(1)
-                st = ServerThread(clientsocket, self)
+                self.index += 1
+                st = ServerThread(clientsocket, self, self.index)
                 st.start()
+
             except socket.timeout:
                 continue
 
@@ -128,7 +132,6 @@ class Server(threading.Thread, QtCore.QObject):
         # modify a global-state dictionary
         with self.lock:
             for key, val in new_dict.items():
-                print(key, val)
                 if val:
                     self._state[key] = effects.config.config[key]
 

@@ -45,18 +45,6 @@ class DisplayWindow(QMainWindow):
 
     @QtCore.pyqtSlot(str)
     def show_msg(self, msg):
-        if 'Connected:' in msg:
-            msg += '|'+self.ui.statusBar.text()
-        elif 'Disconnected:' in msg:
-            # remove connected statement from status
-            curr = self.ui,statusBar.text().split('|')
-            new = []
-            for section in curr:
-                if msg[-5:] in section:
-                    new.append(msg)
-                else:
-                    new.append(section)
-            msg = new
         self.ui.statusBar.showMessage(msg)
 
     @QtCore.pyqtSlot(dict)
