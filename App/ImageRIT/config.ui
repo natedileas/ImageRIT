@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>538</width>
-    <height>366</height>
+    <width>552</width>
+    <height>461</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -116,6 +116,12 @@
       </item>
       <item>
        <widget class="QPushButton" name="reconnect">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>45</height>
+         </size>
+        </property>
         <property name="text">
          <string>Connect</string>
         </property>
@@ -123,6 +129,12 @@
       </item>
       <item>
        <widget class="QPushButton" name="disconnect">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>45</height>
+         </size>
+        </property>
         <property name="text">
          <string>Disconnect</string>
         </property>
@@ -130,6 +142,12 @@
       </item>
       <item>
        <widget class="QPushButton" name="back">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>45</height>
+         </size>
+        </property>
         <property name="text">
          <string>Back</string>
         </property>

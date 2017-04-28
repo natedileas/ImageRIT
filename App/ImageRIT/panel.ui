@@ -46,12 +46,15 @@
          </property>
          <layout class="QGridLayout" name="gridLayout_3">
           <item row="0" column="0">
-           <widget class="QDial" name="Gamma_3">
+           <widget class="QDial" name="rotate">
             <property name="maximum">
              <number>100</number>
             </property>
             <property name="singleStep">
              <number>1</number>
+            </property>
+            <property name="wrapping">
+             <bool>true</bool>
             </property>
             <property name="notchesVisible">
              <bool>true</bool>
@@ -59,7 +62,7 @@
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="QLabel" name="label_4">
+           <widget class="QLabel" name="label_3">
             <property name="text">
              <string>Rotate</string>
             </property>
@@ -81,12 +84,15 @@
          </property>
          <layout class="QGridLayout" name="gridLayout_7">
           <item row="0" column="0">
-           <widget class="QDial" name="Gamma_4">
+           <widget class="QDial" name="scale">
             <property name="maximum">
              <number>100</number>
             </property>
             <property name="singleStep">
              <number>1</number>
+            </property>
+            <property name="value">
+             <number>50</number>
             </property>
             <property name="notchesVisible">
              <bool>true</bool>

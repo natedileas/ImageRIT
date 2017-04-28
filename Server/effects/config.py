@@ -13,6 +13,15 @@ def lut(frame, gamma_in=100, offset=0):
 
     return lut[frame].astype(dtype=numpy.uint8)
 
+def affine(frame, rotation, scale):
+    rot_deg = 360 - rotation * 3.6 # [0-99] -> [0->356], more to clockwise
+    scale = (scale + 1) / 50.
+    center = (frame.shape[1] / 2., frame.shape[0] / 2.)
+    rot_mat = cv2.getRotationMatrix2D(center, rot_deg, scale)
+    frame_ = cv2.warpAffine(frame, rot_mat, (frame.shape[1], frame.shape[0]))
+
+    return frame_
+
 config = {
     "Binarize" : {
         "type": "bool-non-momentary",
@@ -26,6 +35,13 @@ config = {
         "text": "Gamma",
         "func": lut,
         "args": [50]
+    },
+
+    "affine" : {
+        "type": "",
+        "text": ["Scale", "Rotate"],
+        "func": affine,
+        "args": [0, 1]
     }
 }
 

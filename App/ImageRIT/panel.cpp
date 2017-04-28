@@ -15,6 +15,10 @@ Panel::Panel(QWidget *parent) :
     connect(ui->Binarize, SIGNAL(toggled(bool)), this, SLOT(button_toggled(bool)));
     connect(ui->Gamma, SIGNAL(valueChanged(int)), this, SLOT(dial_changed(int)));
 
+    //affine
+    connect(ui->rotate, SIGNAL(valueChanged(int)), this, SLOT(affine(int)));
+    connect(ui->scale, SIGNAL(valueChanged(int)), this, SLOT(affine(int)));
+
     // add secret server button (double click on image in selfie view)
     SecretServer *s = new SecretServer();
     s->installOn(ui->server_label);
@@ -24,6 +28,18 @@ Panel::Panel(QWidget *parent) :
 Panel::~Panel()
 {
     delete ui;
+}
+
+void Panel::affine(int value)
+{
+    int scale_ = ui->scale->value();
+    int angle_ = ui->rotate->value();
+
+    QString send = QString("{\"affine\": [%1, %2]}").arg(QString::number(angle_), QString::number(scale_));
+    QByteArray msg(send.toUtf8());
+    qDebug() << send;
+
+    p->client->write(msg);
 }
 
 void Panel::dial_changed(int value)
