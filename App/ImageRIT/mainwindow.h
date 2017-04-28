@@ -17,8 +17,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    QStackedWidget *pages;
     Client *client;
+    QStackedWidget *pages;
 
 private:
     Ui::MainWindow *ui;

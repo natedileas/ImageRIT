@@ -14,23 +14,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     this->show();
 
-    pages = new QStackedWidget;
-
     Config *c = new Config(this);
-    pages->addWidget(c);
-    pages->setCurrentIndex(0);
+    ui->pages->addWidget(c);
+    ui->pages->setCurrentIndex(1);
 
     Panel *b = new Panel(this);
-    pages->addWidget(b);
-
-    selfie *s = new selfie(this);
-    pages->addWidget(s);
-
-    Email *e = new Email(this);
-    pages->addWidget(e);
-    this->setCentralWidget(pages);
+    ui->pages->addWidget(b);
 
     client = new Client;
+    pages = ui->pages;
 }
 
 MainWindow::~MainWindow()

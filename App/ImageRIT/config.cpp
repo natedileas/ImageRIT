@@ -38,7 +38,8 @@ void Config::on_reconnect_clicked()
 
 void Config::on_back_clicked()
 {
-    p->pages->setCurrentIndex(1);
+    qDebug() << QString::number(p->pages->currentIndex());
+    p->pages->setCurrentIndex(2);
 }
 
 void Config::on_disconnect_clicked()

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>480</width>
-    <height>282</height>
+    <width>487</width>
+    <height>349</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,13 +19,21 @@
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QLabel" name="label">
-      <property name="styleSheet">
-       <string notr="true">image: url(:/images/CIS.gif);</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
+     <widget class="QStackedWidget" name="pages">
+      <widget class="QWidget" name="page">
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="styleSheet">
+           <string notr="true">image: url(:/images/CIS.gif);</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>
