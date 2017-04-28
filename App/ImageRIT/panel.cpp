@@ -99,3 +99,15 @@ void Panel::on_email_clicked()
     p->client->write(msg);
     qDebug() << message;
 }
+
+void Panel::on_affine_reset_clicked()
+{
+    ui->rotate->setValue(0);
+    ui->scale->setValue(50);
+}
+
+void Panel::on_color_reset_clicked()
+{
+    ui->Gamma->setValue(74);
+    ui->Gamma_2->setValue(0);
+}

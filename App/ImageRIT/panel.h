@@ -29,6 +29,10 @@ private slots:
     void go_to_server();
     void affine(int value);
 
+    void on_affine_reset_clicked();
+
+    void on_color_reset_clicked();
+
 private:
     Ui::Panel *ui;
     MainWindow *p;

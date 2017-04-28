@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/images">
         <file>CIS.gif</file>
+        <file>rotate_right-512.png</file>
     </qresource>
 </RCC>
