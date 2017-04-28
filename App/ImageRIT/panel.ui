@@ -177,12 +177,6 @@
         </widget>
        </item>
       </layout>
-      <zorder>frame_6</zorder>
-      <zorder>frame_7</zorder>
-      <zorder>frame_8</zorder>
-      <zorder>Gamma_5</zorder>
-      <zorder>Gamma_5</zorder>
-      <zorder>frame_9</zorder>
      </widget>
      <widget class="QWidget" name="filters">
       <attribute name="title">
@@ -553,11 +547,6 @@
         </widget>
        </item>
       </layout>
-      <zorder>frame_2</zorder>
-      <zorder>frame_5</zorder>
-      <zorder>frame_2</zorder>
-      <zorder>frame_5</zorder>
-      <zorder>dial_3</zorder>
      </widget>
      <widget class="QWidget" name="color">
       <attribute name="title">
@@ -642,7 +631,7 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="QLabel" name="label_3">
+        <widget class="QLabel" name="server_label">
          <property name="styleSheet">
           <string notr="true">image: url(:/images/CIS.gif);</string>
          </property>
@@ -695,13 +684,6 @@
              <enum>QFrame::Raised</enum>
             </property>
             <layout class="QGridLayout" name="gridLayout">
-             <item row="0" column="0">
-              <widget class="QPushButton" name="selfie_2">
-               <property name="text">
-                <string>Take Selfie</string>
-               </property>
-              </widget>
-             </item>
              <item row="0" column="1">
               <widget class="QPushButton" name="email">
                <property name="text">
@@ -709,17 +691,10 @@
                </property>
               </widget>
              </item>
-             <item row="1" column="0">
-              <widget class="QPushButton" name="selfie_back">
+             <item row="0" column="0">
+              <widget class="QPushButton" name="selfie_2">
                <property name="text">
-                <string>Back</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QPushButton" name="server">
-               <property name="text">
-                <string>Server</string>
+                <string>Take Selfie</string>
                </property>
               </widget>
              </item>

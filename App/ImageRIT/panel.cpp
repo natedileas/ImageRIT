@@ -1,6 +1,7 @@
 #include "panel.h"
 #include "ui_panel.h"
 #include "mainwindow.h"
+#include "secretserver.h"
 #include <QDebug>
 
 Panel::Panel(QWidget *parent) :
@@ -13,6 +14,11 @@ Panel::Panel(QWidget *parent) :
 
     connect(ui->Binarize, SIGNAL(toggled(bool)), this, SLOT(button_toggled(bool)));
     connect(ui->Gamma, SIGNAL(valueChanged(int)), this, SLOT(dial_changed(int)));
+
+    // add secret server button (double click on image in selfie view)
+    SecretServer *s = new SecretServer();
+    s->installOn(ui->server_label);
+    connect(s, SIGNAL(doubleclick()), this, SLOT(go_to_server()));
 }
 
 Panel::~Panel()
@@ -40,10 +46,11 @@ void Panel::button_toggled(bool value)
     p->client->write(msg);
 }
 
-void Panel::on_server_clicked()
+void Panel::go_to_server()
 {
     p->pages->setCurrentIndex(1);
 }
+
 
 void Panel::on_selfie_2_clicked()
 {

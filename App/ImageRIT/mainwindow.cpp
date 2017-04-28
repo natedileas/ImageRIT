@@ -4,8 +4,6 @@
 #include "client.h"
 #include "panel.h"
 #include "config.h"
-#include "selfie.h"
-#include "email.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),

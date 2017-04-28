@@ -27,12 +27,14 @@ SOURCES += main.cpp\
     client.cpp \
     mainwindow.cpp \
     panel.cpp \
-    config.cpp
+    config.cpp \
+    secretserver.cpp
 
 HEADERS  += mainwindow.h \
     client.h \
     panel.h \
-    config.h
+    config.h \
+    secretserver.h
 
 FORMS    += mainwindow.ui \
     panel.ui \
