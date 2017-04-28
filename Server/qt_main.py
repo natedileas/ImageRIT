@@ -9,6 +9,7 @@ from Server import Server
 def main(camID):
 
     hostname = socket.gethostname()
+
     ip_address = socket.gethostbyname_ex(hostname)[2][-1]
     print(hostname, ip_address)
     port = 12349
