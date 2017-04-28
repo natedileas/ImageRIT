@@ -3,19 +3,13 @@ import numpy
 
 threshold = lambda *a: cv2.threshold(*a)[1]
 
-def lut(frame, gamma=100, offset=0):
-    # valid range for gamma is [-1, 1]
-    # comes in as [0, 100]
-    gamma /= 50.
-    gamma -= 1.
-    gamma = 1 - gamma
-    gamma = gamma if gamma > -1 else -1
-    gamma = gamma if gamma < 1 else 1
-    # maps to [-1, 1]
-    # checks out -Ryan
+def lut(frame, gamma_in=100, offset=0):
+    # gamma_in comes in as [0, 99], maps to [-2, 2]
+    # this lets the clipping happen more spectacularly
+    gamma = (gamma_in - 50) / 25.
 
-    lut = numpy.asarray([x * gamma for x in range(256)])
-    lut += lut.min()
+    lut = numpy.arange(256) * gamma
+    lut += abs(lut.min())
 
     return lut[frame].astype(dtype=numpy.uint8)
 
