@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     client = new Client;
     pages = ui->pages;
+    this->setCentralWidget(ui->pages);
 }
 
 MainWindow::~MainWindow()
