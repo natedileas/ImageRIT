@@ -22,6 +22,27 @@ def affine(frame, rotation, scale):
 
     return frame_
 
+def param_lut(in_ll, in_ul, gamma, out_ll, out_ul):
+    a = numpy.zeros(256)
+    a[in_ll:in_ul] = (numpy.arange(in_ll, in_ul) ** gamma)
+    a *= (256 / a.max())
+    a[a>=in_ul] = 255
+
+    a = numpy.clip(a, out_ll, out_ul)
+
+    return a.astype(numpy.uint8)
+
+def color(frame, *args):
+    """ apply a 3-channel lut transform (also switches b and r channels) """
+    frame_ = numpy.zeros(frame.shape)
+    rill, riul, rlin, roll, roup, gill, giul, glin, goll, goup, bill, biul, blin, boll, boup = args
+
+    frame_[:,:,0] = param_lut(rill, riul, numpy.log(rlin) - 2.91, roll, roup)[frame[:,:,2]]
+    frame_[:,:,1] = param_lut(gill, giul, numpy.log(glin) - 2.91, goll, goup)[frame[:,:,1]]
+    frame_[:,:,2] = param_lut(bill, biul, numpy.log(blin) - 2.91, boll, boup)[frame[:,:,0]]
+    return frame_.astype(numpy.uint8)
+
+
 config = {
     "Binarize" : {
         "type": "bool-non-momentary",
@@ -42,6 +63,11 @@ config = {
         "text": ["Scale", "Rotate"],
         "func": affine,
         "args": [0, 1]
+    },
+
+    "color" : {
+        "func": color,
+        "args": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
     }
 }
 
