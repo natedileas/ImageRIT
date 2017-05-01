@@ -32,6 +32,7 @@ private slots:
     void on_affine_reset_clicked();
 
     void on_color_reset_clicked();
+    void color_changed(int value);
 
 private:
     Ui::Panel *ui;
