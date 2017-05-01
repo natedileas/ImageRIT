@@ -36,7 +36,7 @@
       </sizepolicy>
      </property>
      <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
+      <enum>QFrame::NoFrame</enum>
      </property>
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
@@ -45,7 +45,7 @@
       <item>
        <widget class="QFrame" name="frame_2">
         <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
+         <enum>QFrame::NoFrame</enum>
         </property>
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
@@ -53,6 +53,11 @@
         <layout class="QGridLayout" name="gridLayout">
          <item row="0" column="0" colspan="2">
           <widget class="QLabel" name="label">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>Hostname/IP Address:</string>
            </property>
@@ -60,6 +65,11 @@
          </item>
          <item row="0" column="2">
           <widget class="QLineEdit" name="hostname">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string> 129.21.52.194</string>
            </property>
@@ -73,6 +83,11 @@
          </item>
          <item row="1" column="0">
           <widget class="QLabel" name="label_2">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>Port:</string>
            </property>
@@ -80,6 +95,11 @@
          </item>
          <item row="1" column="1" colspan="2">
           <widget class="QLineEdit" name="port">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>12349</string>
            </property>
@@ -90,6 +110,11 @@
          </item>
          <item row="2" column="0">
           <widget class="QLabel" name="label_3">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>Server Code:</string>
            </property>
@@ -97,6 +122,11 @@
          </item>
          <item row="2" column="1" colspan="2">
           <widget class="QLineEdit" name="servercode">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string/>
            </property>
@@ -115,42 +145,87 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="reconnect">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>45</height>
-         </size>
+       <widget class="QFrame" name="frame_3">
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
         </property>
-        <property name="text">
-         <string>Connect</string>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
         </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="disconnect">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>45</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Disconnect</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="back">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>45</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Back</string>
-        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QPushButton" name="reconnect">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>100</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Connect</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="disconnect">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>45</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Disconnect</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="back">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>45</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Back</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
      </layout>
