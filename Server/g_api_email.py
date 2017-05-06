@@ -39,7 +39,7 @@ def create_message(sender, to, subject, html_text, image_file):
     An object containing a base64url encoded email object.
     """
     msgRoot = MIMEMultipart('alternative')
-    msgRoot['Subject'] = 'Subject'
+    msgRoot['Subject'] = subject
     msgRoot['From'] = sender
     msgRoot['To'] = to
     msgRoot.preamble = 'This is a multi-part message in MIME format.'
@@ -118,12 +118,12 @@ def send_async(email, imagefile):
     http = credentials.authorize(httplib2.Http())
     service = discovery.build('gmail', 'v1', http=http)
 
-    with open('sample_email.html', 'r') as f:
+    with open('email2.html', 'r') as f:
         html = f.read()
 
     #html = html.replace('IMAGE', imagefile)
 
-    message = create_message('ImageRIT2017@gmail.com', email, 'subject', html, imagefile)
+    message = create_message('ImageRIT2017@gmail.com', email, 'ImageRIT Selfie', html, imagefile)
 
     send_message(service, "me", message)
 

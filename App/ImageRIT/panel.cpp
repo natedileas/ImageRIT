@@ -79,11 +79,19 @@ Panel::~Panel()
 
 void Panel::face(bool value){
     QObject* obj = sender();
-    QString send = QString("{\"face\": [%1]}").arg(obj->objectName());
+    QString send;
+
+    if (value){
+        send = QString("{\"face\": [\"%1\"]}").arg(obj->objectName());
+    }
+    else{
+        send = QString("{\"face\": 0}").arg(obj->objectName());
+    }
+
     QByteArray msg(send.toUtf8());
     qDebug() << send;
-
     p->client->write(msg);
+
 }
 
 void Panel::color_changed(int value)
@@ -367,6 +375,11 @@ void Panel::on_filter_reset_clicked()
     QByteArray msg3(QString("{\"Median\": null}").toUtf8());
     p->client->write(msg3);
 
+    ui->Binarize->setChecked(false);
+    ui->circles->setChecked(false);
+    ui->tiger->setChecked(false);
+    ui->emoj->setChecked(false);
+
 }
 
 void Panel::on_affinereset_clicked()
@@ -377,6 +390,7 @@ void Panel::on_affinereset_clicked()
     ui->roll_g->setValue(0);
     ui->roll_r->setValue(0);
 
-    ui->flip_h->setDown(true);
-    ui->flip_v->setDown(true);
+    ui->flip_h->setChecked(false);
+    ui->flip_v->setChecked(false);
+    ui->logpolar->setChecked(false);
 }
