@@ -16,6 +16,7 @@ Panel::Panel(QWidget *parent) :
     connect(ui->Binarize, SIGNAL(toggled(bool)), this, SLOT(button_toggled(bool)));
     connect(ui->circles, SIGNAL(toggled(bool)), this, SLOT(button_toggled(bool)));
     connect(ui->invert, SIGNAL(toggled(bool)), this, SLOT(button_toggled(bool)));
+    connect(ui->logpolar, SIGNAL(toggled(bool)), this, SLOT(button_toggled(bool)));
 
     // sliders / dials
     connect(ui->quantize, SIGNAL(valueChanged(int)), this, SLOT(dial_changed(int)));
@@ -346,18 +347,6 @@ void Panel::on_pushButton_10_clicked()
 {
     ui->invert->toggle();
     on_pushButton_9_clicked();
-}
-
-void Panel::perspective(int value)
-{
-    int pitch = ui->pitch->value();
-    int yaw = ui->yaw->value();
-
-    QString send = QString("{\"perspective\": [%1, %2]}").arg(QString::number(pitch), QString::number(yaw));
-    QByteArray msg(send.toUtf8());
-    qDebug() << send;
-
-    p->client->write(msg);
 }
 
 void Panel::on_filter_reset_clicked()

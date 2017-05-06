@@ -133,6 +133,11 @@ def oneminusgaussian(frame, sigma):
     frame_ = cv2.Laplacian(frame, cv2.CV_8U, ksize=sigma*2 + 1)
     return frame_
 
+
+def logpolar(frame):
+    frame_ = cv2.linearPolar(frame, (frame.shape[1]/2, frame.shape[0]/2), 300, cv2.INTER_NEAREST)
+    return frame_
+
 config = {
     "Binarize": {
         "type": "bool-non-momentary",
@@ -206,6 +211,10 @@ config = {
     },
     "highpass": {
         "func": oneminusgaussian,
+        "args": []
+    },
+    "logpolar":{
+        "func": logpolar,
         "args": []
     }
 }
