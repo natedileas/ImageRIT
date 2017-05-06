@@ -40,6 +40,12 @@ private slots:
 
     void on_pushButton_8_clicked();
 
+    void on_pushButton_15_clicked();
+
+    void on_pushButton_9_clicked();
+
+    void on_pushButton_10_clicked();
+
 private:
     Ui::Panel *ui;
     MainWindow *p;

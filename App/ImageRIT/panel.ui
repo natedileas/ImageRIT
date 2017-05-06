@@ -1613,7 +1613,7 @@ QSlider::groove:horizontal {
              <enum>Qt::NoFocus</enum>
             </property>
             <property name="text">
-             <string>Something??</string>
+             <string>Heat Vision</string>
             </property>
            </widget>
           </item>
@@ -1645,7 +1645,7 @@ QSlider::groove:horizontal {
              <enum>Qt::NoFocus</enum>
             </property>
             <property name="text">
-             <string>Something??</string>
+             <string>Fruit Rollup</string>
             </property>
            </widget>
           </item>

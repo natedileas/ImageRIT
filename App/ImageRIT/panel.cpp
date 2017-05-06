@@ -262,3 +262,53 @@ void Panel::on_pushButton_8_clicked()
     ui->b4->setValue(88);
     ui->b5->setValue(193);
 }
+
+void Panel::on_pushButton_15_clicked()
+{
+    //[10, 256, 21, 66, 199, 118, 136, 79, 47, 240, 39, 73, 100, 45, 131]
+    ui->r1->setValue(10);
+    ui->r2->setValue(256);
+    ui->r3->setValue(21);
+    ui->r4->setValue(66);
+    ui->r5->setValue(199);
+
+    ui->g1->setValue(118);
+    ui->g2->setValue(136);
+    ui->g3->setValue(79);
+    ui->g4->setValue(47);
+    ui->g5->setValue(240);
+
+    ui->b1->setValue(39);
+    ui->b2->setValue(73);
+    ui->b3->setValue(100);
+    ui->b4->setValue(45);
+    ui->b5->setValue(131);
+}
+
+void Panel::on_pushButton_9_clicked()
+{
+    //[0, 256, 50, 0, 256, 27, 111, 25, 202, 137, 0, 99, 19, 53, 164]
+    ui->r1->setValue(0);
+    ui->r2->setValue(256);
+    ui->r3->setValue(50);
+    ui->r4->setValue(0);
+    ui->r5->setValue(256);
+
+    ui->g1->setValue(27);
+    ui->g2->setValue(111);
+    ui->g3->setValue(25);
+    ui->g4->setValue(202);
+    ui->g5->setValue(137);
+
+    ui->b1->setValue(0);
+    ui->b2->setValue(99);
+    ui->b3->setValue(19);
+    ui->b4->setValue(53);
+    ui->b5->setValue(164);
+}
+
+void Panel::on_pushButton_10_clicked()
+{
+    ui->invert->toggle();
+    on_pushButton_9_clicked();
+}
