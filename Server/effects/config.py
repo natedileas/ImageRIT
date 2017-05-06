@@ -3,6 +3,7 @@ import numpy
 
 threshold = lambda *a: cv2.threshold(*a)[1]
 
+
 def lut(frame, gamma_in=100, offset=0):
     # gamma_in comes in as [0, 99], maps to [-2, 2]
     # this lets the clipping happen more spectacularly
@@ -13,6 +14,7 @@ def lut(frame, gamma_in=100, offset=0):
 
     return lut[frame].astype(dtype=numpy.uint8)
 
+
 def affine(frame, rotation, scale):
     rot_deg = 360 - rotation * 3.6 # [0-99] -> [0->356], more to clockwise
     scale = (scale + 1) / 50.
@@ -21,6 +23,7 @@ def affine(frame, rotation, scale):
     frame_ = cv2.warpAffine(frame, rot_mat, (frame.shape[1], frame.shape[0]))
 
     return frame_
+
 
 def param_lut(in_ll, in_ul, gamma, out_ll, out_ul):
     a = numpy.zeros(256)
@@ -31,6 +34,7 @@ def param_lut(in_ll, in_ul, gamma, out_ll, out_ul):
     a = numpy.clip(a, out_ll, out_ul)
 
     return a.astype(numpy.uint8)
+
 
 def color(frame, *args):
     """ apply a 3-channel lut transform (also switches b and r channels) """
@@ -65,6 +69,14 @@ def lab(frame, l=100, a=100, b=100):
     frame_ = cv2.cvtColor(frame_lab.astype(numpy.uint8), cv2.COLOR_Lab2RGB)
     return frame_.astype(numpy.uint8)
 
+
+def roll_(frame, r, g, b):
+    frame[:, :, 0] = numpy.roll(frame[:, :, 0], r)
+    frame[:, :, 1] = numpy.roll(frame[:, :, 1], g)
+    frame[:, :, 2] = numpy.roll(frame[:, :, 2], b)
+
+    return frame
+
 config = {
     "Binarize": {
         "type": "bool-non-momentary",
@@ -89,7 +101,7 @@ config = {
 
     "color": {
         "func": color,
-        "args": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+        "args": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
     },
 
     "invert": {
@@ -102,6 +114,10 @@ config = {
     },
     "lab": {
         "func": lab,
+        "args": []
+    },
+    "roll": {
+        "func": roll_,
         "args": []
     }
 }

@@ -30,6 +30,7 @@ private slots:
     void affine(int value);
     void hsv(int value);
     void lab(int value);
+    void roll(int value);
 
     void on_affine_reset_clicked();
 

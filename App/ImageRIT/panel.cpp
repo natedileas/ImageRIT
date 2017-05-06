@@ -46,6 +46,10 @@ Panel::Panel(QWidget *parent) :
     connect(ui->l, SIGNAL(valueChanged(int)), this, SLOT(lab(int)));
     connect(ui->a, SIGNAL(valueChanged(int)), this, SLOT(lab(int)));
     connect(ui->b, SIGNAL(valueChanged(int)), this, SLOT(lab(int)));
+    //roll
+    connect(ui->roll_r, SIGNAL(valueChanged(int)), this, SLOT(roll(int)));
+    connect(ui->roll_b, SIGNAL(valueChanged(int)), this, SLOT(roll(int)));
+    connect(ui->roll_g, SIGNAL(valueChanged(int)), this, SLOT(roll(int)));
 
     // add secret server button (double click on image in selfie view)
     SecretServer *s = new SecretServer();
@@ -116,6 +120,21 @@ void Panel::lab(int value)
 
     p->client->write(msg);
 }
+
+void Panel::roll(int value)
+{
+    QString r1 = QString::number(ui->roll_r->value());
+    QString r2 = QString::number(ui->roll_g->value());
+    QString r3 = QString::number(ui->roll_b->value());
+
+    QString send = QString("{\"roll\": [%1, %2, %3]}").arg(r1, r2, r3);
+
+    QByteArray msg(send.toUtf8());
+    qDebug() << send;
+
+    p->client->write(msg);
+}
+
 
 void Panel::affine(int value)
 {
