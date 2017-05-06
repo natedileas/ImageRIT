@@ -12,10 +12,15 @@ Panel::Panel(QWidget *parent) :
 
     p = qobject_cast<MainWindow *>(parent);
 
+    // buttons
     connect(ui->Binarize, SIGNAL(toggled(bool)), this, SLOT(button_toggled(bool)));
     connect(ui->circles, SIGNAL(toggled(bool)), this, SLOT(button_toggled(bool)));
     connect(ui->invert, SIGNAL(toggled(bool)), this, SLOT(button_toggled(bool)));
-    //connect(ui->Gamma, SIGNAL(valueChanged(int)), this, SLOT(dial_changed(int)));
+
+    // sliders / dials
+    connect(ui->quantize, SIGNAL(valueChanged(int)), this, SLOT(dial_changed(int)));
+    connect(ui->highpass, SIGNAL(valueChanged(int)), this, SLOT(dial_changed(int)));
+    connect(ui->lowpass, SIGNAL(valueChanged(int)), this, SLOT(dial_changed(int)));
 
     //affine
     connect(ui->rotate, SIGNAL(valueChanged(int)), this, SLOT(affine(int)));
@@ -336,17 +341,6 @@ void Panel::on_pushButton_10_clicked()
     on_pushButton_9_clicked();
 }
 
-void Panel::on_quantize_s_valueChanged(int value)
-{
-    if (ui->quantize_b->isChecked()){
-        QString send = QString("{\"quantize\": [%1]}").arg(QString::number(value));
-        QByteArray msg(send.toUtf8());
-        qDebug() << send;
-
-        p->client->write(msg);
-    }
-}
-
 void Panel::perspective(int value)
 {
     int pitch = ui->pitch->value();
@@ -357,4 +351,19 @@ void Panel::perspective(int value)
     qDebug() << send;
 
     p->client->write(msg);
+}
+
+void Panel::on_filter_reset_clicked()
+{
+    ui->quantize->setValue(256);
+    QByteArray msg(QString("{\"quantize\": null}").toUtf8());
+    p->client->write(msg);
+
+    ui->highpass->setValue(1);
+    QByteArray msg1(QString("{\"highpass\": null}").toUtf8());
+    p->client->write(msg1);
+
+    ui->lowpass->setValue(1);
+    QByteArray msg2(QString("{\"lowpass\": null}").toUtf8());
+    p->client->write(msg2);
 }

@@ -100,6 +100,7 @@ def perspective(frame, pitch=0, yaw=0):
     # fake perspective transforms
     pass
 
+
 def circles(frame):
     img = cv2.medianBlur(cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY), 5)
 
@@ -115,6 +116,16 @@ def circles(frame):
         cv2.circle(frame, (i[0], i[1]), i[2], (0, 255, 0), 2)
 
     return frame
+
+
+def gaussian(frame, sigma):
+    frame_ = cv2.GaussianBlur(frame, (0, 0), sigma)
+    return frame_
+
+
+def oneminusgaussian(frame, sigma):
+    frame_ = cv2.Laplacian(frame, cv2.CV_8U, ksize=sigma*2 + 1)
+    return frame_
 
 config = {
     "Binarize": {
@@ -177,6 +188,14 @@ config = {
     },
     "circles": {
         "func": circles,
+        "args": []
+    },
+    "lowpass": {
+        "func": gaussian,
+        "args": []
+    },
+    "highpass": {
+        "func": oneminusgaussian,
         "args": []
     }
 
