@@ -41,9 +41,9 @@ def color(frame, *args):
     frame_ = numpy.zeros(frame.shape)
     rill, riul, rlin, roll, roup, gill, giul, glin, goll, goup, bill, biul, blin, boll, boup = args
 
-    frame_[:,:,0] = param_lut(rill, riul, numpy.log(rlin) - 2.91, roll, roup)[frame[:,:,0]]
-    frame_[:,:,1] = param_lut(gill, giul, numpy.log(glin) - 2.91, goll, goup)[frame[:,:,1]]
-    frame_[:,:,2] = param_lut(bill, biul, numpy.log(blin) - 2.91, boll, boup)[frame[:,:,2]]
+    frame_[:, :, 0] = param_lut(rill, riul, numpy.log(rlin) - 2.91, roll, roup)[frame[:, :, 0]]
+    frame_[:, :, 1] = param_lut(gill, giul, numpy.log(glin) - 2.91, goll, goup)[frame[:, :, 1]]
+    frame_[:, :, 2] = param_lut(bill, biul, numpy.log(blin) - 2.91, boll, boup)[frame[:, :, 2]]
     return frame_.astype(numpy.uint8)
 
 
@@ -84,6 +84,15 @@ def flip_h(frame):
 def flip_v(frame):
     frame_ = numpy.flipud(frame)
     return frame_
+
+def quantize(frame, num_colors=256):
+    # TODO add log-log scaling
+    m = 256 / num_colors
+    lut = numpy.arange(256, dtype=numpy.uint8)
+    lut = lut // m
+    lut *= m
+
+    return lut[frame].astype(numpy.uint8)
 
 config = {
     "Binarize": {
@@ -134,6 +143,10 @@ config = {
     },
     "flip_v": {
         "func": flip_v,
+        "args": []
+    },
+    "quantize": {
+        "func": quantize,
         "args": []
     }
 

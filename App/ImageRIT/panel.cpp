@@ -335,3 +335,14 @@ void Panel::on_pushButton_10_clicked()
     ui->invert->toggle();
     on_pushButton_9_clicked();
 }
+
+void Panel::on_quantize_s_valueChanged(int value)
+{
+    if (ui->quantize_b->isChecked()){
+        QString send = QString("{\"quantize\": [%1]}").arg(QString::number(value));
+        QByteArray msg(send.toUtf8());
+        qDebug() << send;
+
+        p->client->write(msg);
+    }
+}
