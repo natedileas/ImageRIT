@@ -28,11 +28,17 @@ private slots:
     void on_email_clicked();
     void go_to_server();
     void affine(int value);
+    void hsv(int value);
+    void lab(int value);
 
     void on_affine_reset_clicked();
 
     void on_color_reset_clicked();
     void color_changed(int value);
+
+    void on_pushButton_7_clicked();
+
+    void on_pushButton_8_clicked();
 
 private:
     Ui::Panel *ui;

@@ -13,6 +13,8 @@ Panel::Panel(QWidget *parent) :
     p = qobject_cast<MainWindow *>(parent);
 
     connect(ui->Binarize, SIGNAL(toggled(bool)), this, SLOT(button_toggled(bool)));
+
+    connect(ui->invert, SIGNAL(toggled(bool)), this, SLOT(button_toggled(bool)));
     //connect(ui->Gamma, SIGNAL(valueChanged(int)), this, SLOT(dial_changed(int)));
 
     //affine
@@ -35,6 +37,15 @@ Panel::Panel(QWidget *parent) :
     connect(ui->b3, SIGNAL(valueChanged(int)), this, SLOT(color_changed(int)));
     connect(ui->b4, SIGNAL(valueChanged(int)), this, SLOT(color_changed(int)));
     connect(ui->b5, SIGNAL(valueChanged(int)), this, SLOT(color_changed(int)));
+
+    //hsv
+    connect(ui->h, SIGNAL(valueChanged(int)), this, SLOT(hsv(int)));
+    connect(ui->s, SIGNAL(valueChanged(int)), this, SLOT(hsv(int)));
+    connect(ui->v, SIGNAL(valueChanged(int)), this, SLOT(hsv(int)));
+    //lab
+    connect(ui->l, SIGNAL(valueChanged(int)), this, SLOT(lab(int)));
+    connect(ui->a, SIGNAL(valueChanged(int)), this, SLOT(lab(int)));
+    connect(ui->b, SIGNAL(valueChanged(int)), this, SLOT(lab(int)));
 
     // add secret server button (double click on image in selfie view)
     SecretServer *s = new SecretServer();
@@ -72,6 +83,34 @@ void Panel::color_changed(int value)
                 g4, g5, b1, b2, b3, b4, b5);
 
     QString send = s1 + s2;
+    QByteArray msg(send.toUtf8());
+    qDebug() << send;
+
+    p->client->write(msg);
+}
+
+void Panel::hsv(int value)
+{
+    QString r1 = QString::number(ui->h->value());
+    QString r2 = QString::number(ui->s->value());
+    QString r3 = QString::number(ui->v->value());
+
+    QString send = QString("{\"hsv\": [%1, %2, %3]}").arg(r1, r2, r3);
+
+    QByteArray msg(send.toUtf8());
+    qDebug() << send;
+
+    p->client->write(msg);
+}
+
+void Panel::lab(int value)
+{
+    QString r1 = QString::number(ui->l->value());
+    QString r2 = QString::number(ui->a->value());
+    QString r3 = QString::number(ui->b->value());
+
+    QString send = QString("{\"lab\": [%1, %2, %3]}").arg(r1, r2, r3);
+
     QByteArray msg(send.toUtf8());
     qDebug() << send;
 
@@ -173,4 +212,53 @@ void Panel::on_color_reset_clicked()
     ui->b3->setValue(50);
     ui->b4->setValue(0);
     ui->b5->setValue(256);
+
+    ui->h->setValue(100);
+    ui->s->setValue(100);
+    ui->v->setValue(100);
+    ui->l->setValue(100);
+    ui->a->setValue(100);
+    ui->b->setValue(100);
+}
+
+void Panel::on_pushButton_7_clicked()
+{
+    ui->r1->setValue(0);
+    ui->r2->setValue(88);
+    ui->r3->setValue(100);
+    ui->r4->setValue(0);
+    ui->r5->setValue(256);
+
+    ui->g1->setValue(0);
+    ui->g2->setValue(123);
+    ui->g3->setValue(74);
+    ui->g4->setValue(0);
+    ui->g5->setValue(256);
+
+    ui->b1->setValue(0);
+    ui->b2->setValue(57);
+    ui->b3->setValue(94);
+    ui->b4->setValue(0);
+    ui->b5->setValue(256);
+}
+
+void Panel::on_pushButton_8_clicked()
+{
+    ui->r1->setValue(0);
+    ui->r2->setValue(256);
+    ui->r3->setValue(39);
+    ui->r4->setValue(66);
+    ui->r5->setValue(199);
+
+    ui->g1->setValue(0);
+    ui->g2->setValue(256);
+    ui->g3->setValue(79);
+    ui->g4->setValue(47);
+    ui->g5->setValue(240);
+
+    ui->b1->setValue(85);
+    ui->b2->setValue(256);
+    ui->b3->setValue(100);
+    ui->b4->setValue(88);
+    ui->b5->setValue(193);
 }

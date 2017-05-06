@@ -37,37 +37,72 @@ def color(frame, *args):
     frame_ = numpy.zeros(frame.shape)
     rill, riul, rlin, roll, roup, gill, giul, glin, goll, goup, bill, biul, blin, boll, boup = args
 
-    frame_[:,:,0] = param_lut(rill, riul, numpy.log(rlin) - 2.91, roll, roup)[frame[:,:,2]]
+    frame_[:,:,0] = param_lut(rill, riul, numpy.log(rlin) - 2.91, roll, roup)[frame[:,:,0]]
     frame_[:,:,1] = param_lut(gill, giul, numpy.log(glin) - 2.91, goll, goup)[frame[:,:,1]]
-    frame_[:,:,2] = param_lut(bill, biul, numpy.log(blin) - 2.91, boll, boup)[frame[:,:,0]]
+    frame_[:,:,2] = param_lut(bill, biul, numpy.log(blin) - 2.91, boll, boup)[frame[:,:,2]]
     return frame_.astype(numpy.uint8)
 
 
+def invert(frame):
+    lut = numpy.arange(256, dtype=numpy.uint8)[::-1]
+    return lut[frame]
+
+
+def hsv(frame, h=100, s=100, v=100):
+    frame_hsv = cv2.cvtColor(frame, cv2.COLOR_RGB2HSV).astype(numpy.float64)
+    frame_hsv[:, :, 0] *= h / 100
+    frame_hsv[:, :, 1] *= s / 100
+    frame_hsv[:, :, 2] *= v / 100
+    frame_ = cv2.cvtColor(frame_hsv.astype(numpy.uint8), cv2.COLOR_HSV2RGB)
+    return frame_
+
+
+def lab(frame, l=100, a=100, b=100):
+    frame_lab = cv2.cvtColor(frame, cv2.COLOR_RGB2Lab).astype(numpy.float64)
+    frame_lab[:, :, 0] *= l / 100
+    frame_lab[:, :, 1] *= a / 100
+    frame_lab[:, :, 2] *= b / 100
+    frame_ = cv2.cvtColor(frame_lab.astype(numpy.uint8), cv2.COLOR_Lab2RGB)
+    return frame_.astype(numpy.uint8)
+
 config = {
-    "Binarize" : {
+    "Binarize": {
         "type": "bool-non-momentary",
         "text": "Binarize",
         "func": threshold,
         "args": [127, 255, cv2.THRESH_BINARY]
     },
 
-    "Gamma" : {
+    "Gamma": {
         "type": "int-dial",
         "text": "Gamma",
         "func": lut,
         "args": [50]
     },
 
-    "affine" : {
+    "affine": {
         "type": "",
         "text": ["Scale", "Rotate"],
         "func": affine,
         "args": [0, 1]
     },
 
-    "color" : {
+    "color": {
         "func": color,
         "args": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    },
+
+    "invert": {
+        "func": invert,
+        "args": []
+    },
+    "hsv": {
+        "func": hsv,
+        "args": []
+    },
+    "lab": {
+        "func": lab,
+        "args": []
     }
 }
 
