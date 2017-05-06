@@ -1,5 +1,6 @@
 import cv2
 import numpy
+from PIL import Image
 
 threshold = lambda *a: cv2.threshold(*a)[1]
 
@@ -133,6 +134,30 @@ def oneminusgaussian(frame, sigma):
     frame_ = cv2.Laplacian(frame, cv2.CV_8U, ksize=sigma*2 + 1)
     return frame_
 
+filenames = ['C:\\Users\\Ryan\\Documents\\Imaging_Science\\ImageRIT\\Server\\effects\\tiger', 'C:\\Users\\Ryan\\Documents\\Imaging Science\\ImageRIT\\Server\\effects\\emoj']
+overlay = {key.split('\\')[-1]: cv2.imread(key + '.png', -1) for key in filenames}
+
+def face(frame, identifier):
+    arr = overlay[identifier].copy()
+    red = arr[:,:,2].copy()
+    blue = arr[:,:,0].copy()
+    arr[:,:,0] = red
+    arr[:,:,2] = blue
+    gray = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)
+    
+    cascade = cv2.CascadeClassifier('C:\\Users\\Ryan\\Documents\\Imaging_Science\\ImageRIT\\Server\\effects\\haarcascade_frontalface_default.xml')
+    face_collection = cascade.detectMultiScale(gray, 1.5, 5)
+
+    back = Image.fromarray(frame)
+
+    for (x,y,w,h) in face_collection:
+        arr = cv2.resize(arr, (int(1.5*w),int(1.5*h)), interpolation = cv2.INTER_CUBIC)
+        fore = Image.fromarray(arr)
+        back.paste(fore, (x,y), fore)
+
+    return numpy.asarray(back)
+
+
 config = {
     "Binarize": {
         "type": "bool-non-momentary",
@@ -206,6 +231,10 @@ config = {
     },
     "highpass": {
         "func": oneminusgaussian,
+        "args": []
+    },
+    "face": {
+        "func": face,
         "args": []
     }
 }
