@@ -87,7 +87,8 @@ def flip_v(frame):
 
 def quantize(frame, num_colors=256):
     # TODO add log-log scaling
-    m = 256 / num_colors
+    m = (256 / num_colors) ** 6
+
     lut = numpy.arange(256, dtype=numpy.uint8)
     lut = lut // m
     lut *= m
