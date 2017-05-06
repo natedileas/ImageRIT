@@ -31,6 +31,7 @@ private slots:
     void hsv(int value);
     void lab(int value);
     void roll(int value);
+    void perspective(int value);
 
     void on_affine_reset_clicked();
 

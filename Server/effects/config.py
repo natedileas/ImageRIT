@@ -94,6 +94,27 @@ def quantize(frame, num_colors=256):
 
     return lut[frame].astype(numpy.uint8)
 
+
+def perspective(frame, pitch=0, yaw=0):
+    # fake perspective transforms
+    pass
+
+def circles(frame):
+    img = cv2.medianBlur(cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY), 5)
+
+    circles = cv2.HoughCircles(img, cv2.HOUGH_GRADIENT, 1, 40,
+                                param1=50, param2=30, minRadius=10, maxRadius=50)
+
+    if circles is None:
+        return frame
+
+    circles = numpy.uint16(numpy.around(circles))
+    for i in circles[0, :]:
+        # draw the outer circle
+        cv2.circle(frame, (i[0], i[1]), i[2], (0, 255, 0), 2)
+
+    return frame
+
 config = {
     "Binarize": {
         "type": "bool-non-momentary",
@@ -147,6 +168,14 @@ config = {
     },
     "quantize": {
         "func": quantize,
+        "args": []
+    },
+    "perspective": {
+        "func": perspective,
+        "args": []
+    },
+    "circles": {
+        "func": circles,
         "args": []
     }
 

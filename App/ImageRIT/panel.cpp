@@ -13,7 +13,7 @@ Panel::Panel(QWidget *parent) :
     p = qobject_cast<MainWindow *>(parent);
 
     connect(ui->Binarize, SIGNAL(toggled(bool)), this, SLOT(button_toggled(bool)));
-
+     connect(ui->circles, SIGNAL(toggled(bool)), this, SLOT(button_toggled(bool)));
     connect(ui->invert, SIGNAL(toggled(bool)), this, SLOT(button_toggled(bool)));
     //connect(ui->Gamma, SIGNAL(valueChanged(int)), this, SLOT(dial_changed(int)));
 
@@ -345,4 +345,16 @@ void Panel::on_quantize_s_valueChanged(int value)
 
         p->client->write(msg);
     }
+}
+
+void Panel::perspective(int value)
+{
+    int pitch = ui->pitch->value();
+    int yaw = ui->yaw->value();
+
+    QString send = QString("{\"perspective\": [%1, %2]}").arg(QString::number(pitch), QString::number(yaw));
+    QByteArray msg(send.toUtf8());
+    qDebug() << send;
+
+    p->client->write(msg);
 }
