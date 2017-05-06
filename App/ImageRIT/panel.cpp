@@ -228,12 +228,6 @@ void Panel::on_email_clicked()
     qDebug() << message;
 }
 
-void Panel::on_affine_reset_clicked()
-{
-    ui->rotate->setValue(0);
-    ui->scale->setValue(50);
-}
-
 void Panel::on_color_reset_clicked()
 {
     ui->r1->setValue(0);
@@ -384,4 +378,16 @@ void Panel::on_filter_reset_clicked()
     QByteArray msg3(QString("{\"Median\": null}").toUtf8());
     p->client->write(msg3);
 
+}
+
+void Panel::on_affinereset_clicked()
+{
+    ui->rotate->setValue(0);
+    ui->scale->setValue(50);
+    ui->roll_b->setValue(0);
+    ui->roll_g->setValue(0);
+    ui->roll_r->setValue(0);
+
+    ui->flip_h->setDown(true);
+    ui->flip_v->setDown(true);
 }
