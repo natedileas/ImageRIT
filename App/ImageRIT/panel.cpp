@@ -13,7 +13,7 @@ Panel::Panel(QWidget *parent) :
     p = qobject_cast<MainWindow *>(parent);
 
     connect(ui->Binarize, SIGNAL(toggled(bool)), this, SLOT(button_toggled(bool)));
-     connect(ui->circles, SIGNAL(toggled(bool)), this, SLOT(button_toggled(bool)));
+    connect(ui->circles, SIGNAL(toggled(bool)), this, SLOT(button_toggled(bool)));
     connect(ui->invert, SIGNAL(toggled(bool)), this, SLOT(button_toggled(bool)));
     //connect(ui->Gamma, SIGNAL(valueChanged(int)), this, SLOT(dial_changed(int)));
 
