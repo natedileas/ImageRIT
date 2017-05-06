@@ -13,8 +13,9 @@ Panel::Panel(QWidget *parent) :
     p = qobject_cast<MainWindow *>(parent);
 
     connect(ui->Binarize, SIGNAL(toggled(bool)), this, SLOT(button_toggled(bool)));
-     connect(ui->circles, SIGNAL(toggled(bool)), this, SLOT(button_toggled(bool)));
+    connect(ui->circles, SIGNAL(toggled(bool)), this, SLOT(button_toggled(bool)));
     connect(ui->invert, SIGNAL(toggled(bool)), this, SLOT(button_toggled(bool)));
+    //connect(ui->Bilateral, SIGNAL(toggled(bool)), this, SLOT(button_toggled(bool)));
     //connect(ui->Gamma, SIGNAL(valueChanged(int)), this, SLOT(dial_changed(int)));
 
     //affine
@@ -357,4 +358,15 @@ void Panel::perspective(int value)
     qDebug() << send;
 
     p->client->write(msg);
+}
+
+void Panel::on_Median_s_valueChanged(int value)
+{
+    if (ui->Median_b->isChecked()){
+        QString send = QString("{\"Median\": [%1]}").arg(QString::number(value));
+        QByteArray msg(send.toUtf8());
+        qDebug() << send;
+
+        p->client->write(msg);
+    }
 }

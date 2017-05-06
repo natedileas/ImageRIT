@@ -115,6 +115,13 @@ def circles(frame):
 
     return frame
 
+def Median(frame, d):
+    d = d*2+1
+    for band in range(frame.shape[2]):
+        frame[:,:,band] = cv2.medianBlur(frame[:,:,band], d)
+
+    return frame
+
 config = {
     "Binarize": {
         "type": "bool-non-momentary",
@@ -177,8 +184,11 @@ config = {
     "circles": {
         "func": circles,
         "args": []
+    },
+    "Median": {
+        "func": Median,
+        "args": []
     }
-
 }
 
 # be able to call in process with:

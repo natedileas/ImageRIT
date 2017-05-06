@@ -50,6 +50,8 @@ private slots:
 
     void on_quantize_s_valueChanged(int value);
 
+    void on_Median_s_valueChanged(int value);
+
 private:
     Ui::Panel *ui;
     MainWindow *p;
