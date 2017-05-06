@@ -51,5 +51,5 @@ class ImageRIT_PyQt(QtCore.QObject):
 def numpy2qimage(array):
     height, width, channel = array.shape
     bytesPerLine = 3 * width
-    qImg = QImage(array.data, width, height, bytesPerLine, QImage.Format_RGB888)
+    qImg = QImage(array.copy().data, width, height, bytesPerLine, QImage.Format_RGB888)
     return qImg

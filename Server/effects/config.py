@@ -77,6 +77,14 @@ def roll_(frame, r, g, b):
 
     return frame
 
+def flip_h(frame):
+    frame_ = numpy.fliplr(frame)
+    return frame_
+
+def flip_v(frame):
+    frame_ = numpy.flipud(frame)
+    return frame_
+
 config = {
     "Binarize": {
         "type": "bool-non-momentary",
@@ -119,7 +127,16 @@ config = {
     "roll": {
         "func": roll_,
         "args": []
+    },
+    "flip_h": {
+        "func": flip_h,
+        "args": []
+    },
+    "flip_v": {
+        "func": flip_v,
+        "args": []
     }
+
 }
 
 # be able to call in process with:

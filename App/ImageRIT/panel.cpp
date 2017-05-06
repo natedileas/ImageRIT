@@ -51,6 +51,10 @@ Panel::Panel(QWidget *parent) :
     connect(ui->roll_b, SIGNAL(valueChanged(int)), this, SLOT(roll(int)));
     connect(ui->roll_g, SIGNAL(valueChanged(int)), this, SLOT(roll(int)));
 
+    //flip
+    connect(ui->flip_h, SIGNAL(toggled(bool)), this, SLOT(button_toggled(bool)));
+    connect(ui->flip_v, SIGNAL(toggled(bool)), this, SLOT(button_toggled(bool)));
+
     // add secret server button (double click on image in selfie view)
     SecretServer *s = new SecretServer();
     s->installOn(ui->server_label);
