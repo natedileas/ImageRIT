@@ -105,44 +105,6 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="2">
-           <widget class="QPushButton" name="flip_h">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>Flip Horizontally</string>
-            </property>
-            <property name="checkable">
-             <bool>true</bool>
-            </property>
-            <property name="flat">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="2">
-           <widget class="QPushButton" name="flip_v">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>Flip Vertically</string>
-            </property>
-            <property name="checkable">
-             <bool>true</bool>
-            </property>
-            <property name="flat">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="0">
            <widget class="QLabel" name="label_3">
             <property name="text">
@@ -165,70 +127,6 @@
           <enum>QFrame::Raised</enum>
          </property>
          <layout class="QGridLayout" name="gridLayout_5">
-          <item row="1" column="2">
-           <widget class="QLabel" name="label_13">
-            <property name="text">
-             <string>Roll BLUE</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QDial" name="roll_g">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="maximum">
-             <number>100</number>
-            </property>
-            <property name="singleStep">
-             <number>1</number>
-            </property>
-            <property name="wrapping">
-             <bool>true</bool>
-            </property>
-            <property name="notchesVisible">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLabel" name="label_10">
-            <property name="text">
-             <string>Roll GREEN</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="2">
-           <widget class="QDial" name="roll_b">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="maximum">
-             <number>100</number>
-            </property>
-            <property name="singleStep">
-             <number>1</number>
-            </property>
-            <property name="wrapping">
-             <bool>true</bool>
-            </property>
-            <property name="notchesVisible">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="0">
            <widget class="QDial" name="roll_r">
             <property name="sizePolicy">
@@ -270,6 +168,70 @@ padding: 6px;</string>
             </property>
            </widget>
           </item>
+          <item row="1" column="2">
+           <widget class="QLabel" name="label_13">
+            <property name="text">
+             <string>Roll BLUE</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLabel" name="label_10">
+            <property name="text">
+             <string>Roll GREEN</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QDial" name="roll_b">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximum">
+             <number>100</number>
+            </property>
+            <property name="singleStep">
+             <number>1</number>
+            </property>
+            <property name="wrapping">
+             <bool>true</bool>
+            </property>
+            <property name="notchesVisible">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QDial" name="roll_g">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximum">
+             <number>100</number>
+            </property>
+            <property name="singleStep">
+             <number>1</number>
+            </property>
+            <property name="wrapping">
+             <bool>true</bool>
+            </property>
+            <property name="notchesVisible">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
@@ -283,97 +245,51 @@ padding: 6px;</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_7">
           <item row="1" column="1">
-           <widget class="QLabel" name="label_19">
-            <property name="text">
-             <string>Yaw</string>
+           <widget class="QPushButton" name="flip_v">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
+            <property name="text">
+             <string>Flip Vertically</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="flat">
+             <bool>false</bool>
             </property>
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="QLabel" name="label_20">
-            <property name="text">
-             <string>Pitch</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QDial" name="pitch">
+           <widget class="QPushButton" name="flip_h">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="minimum">
-             <number>-180</number>
+            <property name="text">
+             <string>Flip Horizontally</string>
             </property>
-            <property name="maximum">
-             <number>180</number>
-            </property>
-            <property name="singleStep">
-             <number>10</number>
-            </property>
-            <property name="wrapping">
-             <bool>false</bool>
-            </property>
-            <property name="notchesVisible">
+            <property name="checkable">
              <bool>true</bool>
+            </property>
+            <property name="flat">
+             <bool>false</bool>
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QDial" name="yaw">
+          <item row="1" column="3">
+           <widget class="QPushButton" name="affinereset">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="minimum">
-             <number>-180</number>
-            </property>
-            <property name="maximum">
-             <number>180</number>
-            </property>
-            <property name="singleStep">
-             <number>10</number>
-            </property>
-            <property name="wrapping">
-             <bool>false</bool>
-            </property>
-            <property name="notchesVisible">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_3">
-            <property name="text">
-             <string>Rotate</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLabel" name="label_6">
-            <property name="text">
-             <string>Scale</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="2">
-           <widget class="QPushButton" name="affine_reset">
             <property name="focusPolicy">
              <enum>Qt::NoFocus</enum>
             </property>
@@ -381,33 +297,46 @@ padding: 6px;</string>
              <bool>false</bool>
             </property>
             <property name="styleSheet">
-             <string notr="true">border-width: 4px;
-border-radius: 4px;
-border-color: black;
-padding: 6px;</string>
+             <string notr="true"/>
             </property>
             <property name="text">
              <string/>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset theme="reset" resource="resources.qrc">
               <normaloff>:/images/rotate_right-512.png</normaloff>
-              <normalon>:/images/rotate_right-512_light.png</normalon>
+              <normalon>:/images/rotate_right-512.png</normalon>
               <activeoff>:/images/rotate_right-512.png</activeoff>
-              <activeon>:/images/rotate_right-512_light.png</activeon>
+              <activeon>:/images/rotate_right-512.png</activeon>
               <selectedoff>:/images/rotate_right-512.png</selectedoff>
-              <selectedon>:/images/rotate_right-512_light.png</selectedon>:/images/rotate_right-512.png</iconset>
+              <selectedon>:/images/rotate_right-512.png</selectedon>:/images/rotate_right-512.png</iconset>
             </property>
             <property name="iconSize">
              <size>
-              <width>32</width>
-              <height>32</height>
+              <width>40</width>
+              <height>40</height>
              </size>
             </property>
             <property name="checkable">
              <bool>false</bool>
             </property>
             <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QPushButton" name="logpolar">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Log Polar</string>
+            </property>
+            <property name="checkable">
              <bool>true</bool>
             </property>
            </widget>
@@ -669,6 +598,9 @@ padding: 6px;</string>
             <property name="text">
              <string>(tiger)</string>
             </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item row="0" column="1">
@@ -681,6 +613,9 @@ padding: 6px;</string>
             </property>
             <property name="text">
              <string>(emoj)</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -1668,6 +1603,22 @@ QSlider::groove:horizontal {
           <enum>QFrame::Raised</enum>
          </property>
          <layout class="QGridLayout" name="gridLayout_8">
+          <item row="1" column="1">
+           <widget class="QPushButton" name="pushButton_9">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
+            <property name="text">
+             <string>Fruit Rollup</string>
+            </property>
+           </widget>
+          </item>
           <item row="1" column="2">
            <widget class="QPushButton" name="pushButton_10">
             <property name="sizePolicy">
@@ -1700,8 +1651,8 @@ QSlider::groove:horizontal {
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
-           <widget class="QPushButton" name="pushButton_9">
+          <item row="0" column="0">
+           <widget class="QPushButton" name="pushButton_7">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -1712,7 +1663,7 @@ QSlider::groove:horizontal {
              <enum>Qt::NoFocus</enum>
             </property>
             <property name="text">
-             <string>Fruit Rollup</string>
+             <string>Something??</string>
             </property>
            </widget>
           </item>
@@ -1735,22 +1686,6 @@ QSlider::groove:horizontal {
             </property>
            </widget>
           </item>
-          <item row="0" column="0">
-           <widget class="QPushButton" name="pushButton_7">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
-            </property>
-            <property name="text">
-             <string>Something??</string>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="1">
            <widget class="QPushButton" name="pushButton_8">
             <property name="sizePolicy">
@@ -1767,7 +1702,7 @@ QSlider::groove:horizontal {
             </property>
            </widget>
           </item>
-          <item row="2" column="2">
+          <item row="1" column="3">
            <widget class="QPushButton" name="color_reset">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Expanding">

@@ -157,6 +157,10 @@ def face(frame, identifier):
 
     return numpy.asarray(back)
 
+def logpolar(frame):
+    frame_ = cv2.linearPolar(frame, (frame.shape[1]/2, frame.shape[0]/2), 300, cv2.INTER_NEAREST)
+    return frame_
+
 
 config = {
     "Binarize": {
@@ -235,6 +239,10 @@ config = {
     },
     "face": {
         "func": face,
+        "args": []
+    },
+    "logpolar":{
+        "func": logpolar,
         "args": []
     }
 }

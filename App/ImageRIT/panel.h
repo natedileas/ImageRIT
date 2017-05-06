@@ -31,25 +31,19 @@ private slots:
     void hsv(int value);
     void lab(int value);
     void roll(int value);
-    void perspective(int value);
+    void face(bool value);
 
-    void on_affine_reset_clicked();
-
-    void on_color_reset_clicked();
     void color_changed(int value);
-
     void on_pushButton_7_clicked();
-
     void on_pushButton_8_clicked();
-
     void on_pushButton_15_clicked();
-
     void on_pushButton_9_clicked();
-
     void on_pushButton_10_clicked();
 
+    void on_color_reset_clicked();
     void on_filter_reset_clicked();
 
+    void on_affinereset_clicked();
 
 private:
     Ui::Panel *ui;

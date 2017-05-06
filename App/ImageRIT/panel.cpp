@@ -16,6 +16,7 @@ Panel::Panel(QWidget *parent) :
     connect(ui->Binarize, SIGNAL(toggled(bool)), this, SLOT(button_toggled(bool)));
     connect(ui->circles, SIGNAL(toggled(bool)), this, SLOT(button_toggled(bool)));
     connect(ui->invert, SIGNAL(toggled(bool)), this, SLOT(button_toggled(bool)));
+    connect(ui->logpolar, SIGNAL(toggled(bool)), this, SLOT(button_toggled(bool)));
 
     // sliders / dials
     connect(ui->quantize, SIGNAL(valueChanged(int)), this, SLOT(dial_changed(int)));
@@ -78,11 +79,19 @@ Panel::~Panel()
 
 void Panel::face(bool value){
     QObject* obj = sender();
-    QString send = QString("{\"face\": [%1]}").arg(obj->objectName());
+    QString send;
+
+    if (value){
+        send = QString("{\"face\": [\"%1\"]}").arg(obj->objectName());
+    }
+    else{
+        send = QString("{\"face\": 0}").arg(obj->objectName());
+    }
+
     QByteArray msg(send.toUtf8());
     qDebug() << send;
-
     p->client->write(msg);
+
 }
 
 void Panel::color_changed(int value)
@@ -228,12 +237,6 @@ void Panel::on_email_clicked()
     qDebug() << message;
 }
 
-void Panel::on_affine_reset_clicked()
-{
-    ui->rotate->setValue(0);
-    ui->scale->setValue(50);
-}
-
 void Panel::on_color_reset_clicked()
 {
     ui->r1->setValue(0);
@@ -354,18 +357,6 @@ void Panel::on_pushButton_10_clicked()
     on_pushButton_9_clicked();
 }
 
-void Panel::perspective(int value)
-{
-    int pitch = ui->pitch->value();
-    int yaw = ui->yaw->value();
-
-    QString send = QString("{\"perspective\": [%1, %2]}").arg(QString::number(pitch), QString::number(yaw));
-    QByteArray msg(send.toUtf8());
-    qDebug() << send;
-
-    p->client->write(msg);
-}
-
 void Panel::on_filter_reset_clicked()
 {
     ui->quantize->setValue(256);
@@ -384,4 +375,22 @@ void Panel::on_filter_reset_clicked()
     QByteArray msg3(QString("{\"Median\": null}").toUtf8());
     p->client->write(msg3);
 
+    ui->Binarize->setChecked(false);
+    ui->circles->setChecked(false);
+    ui->tiger->setChecked(false);
+    ui->emoj->setChecked(false);
+
+}
+
+void Panel::on_affinereset_clicked()
+{
+    ui->rotate->setValue(0);
+    ui->scale->setValue(50);
+    ui->roll_b->setValue(0);
+    ui->roll_g->setValue(0);
+    ui->roll_r->setValue(0);
+
+    ui->flip_h->setChecked(false);
+    ui->flip_v->setChecked(false);
+    ui->logpolar->setChecked(false);
 }
