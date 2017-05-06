@@ -61,6 +61,10 @@ Panel::Panel(QWidget *parent) :
     connect(ui->flip_h, SIGNAL(toggled(bool)), this, SLOT(button_toggled(bool)));
     connect(ui->flip_v, SIGNAL(toggled(bool)), this, SLOT(button_toggled(bool)));
 
+    // face stuff
+    connect(ui->tiger, SIGNAL(toggled(bool)), this, SLOT(face(bool)));
+    connect(ui->emoj, SIGNAL(toggled(bool)), this, SLOT(face(bool)));
+
     // add secret server button (double click on image in selfie view)
     SecretServer *s = new SecretServer();
     s->installOn(ui->server_label);
@@ -70,6 +74,15 @@ Panel::Panel(QWidget *parent) :
 Panel::~Panel()
 {
     delete ui;
+}
+
+void Panel::face(bool value){
+    QObject* obj = sender();
+    QString send = QString("{\"face\": [%1]}").arg(obj->objectName());
+    QByteArray msg(send.toUtf8());
+    qDebug() << send;
+
+    p->client->write(msg);
 }
 
 void Panel::color_changed(int value)
@@ -89,7 +102,6 @@ void Panel::color_changed(int value)
     QString b3 = QString::number(ui->b3->value());
     QString b4 = QString::number(ui->b4->value());
     QString b5 = QString::number(ui->b5->value());
-
 
     QString s1 = QString("{\"color\": [%1, %2, %3, %4, %5, %6, %7, %8, ").arg( \
                 r1, r2, r3, r4, r5, g1, g2, g3);

@@ -659,7 +659,7 @@ padding: 6px;</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_6">
           <item row="0" column="0">
-           <widget class="QPushButton" name="pushButton_2">
+           <widget class="QPushButton" name="tiger">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -672,7 +672,7 @@ padding: 6px;</string>
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QPushButton" name="pushButton_11">
+           <widget class="QPushButton" name="emoj">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
               <horstretch>0</horstretch>
