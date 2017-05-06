@@ -368,6 +368,22 @@ padding: 6px;</string>
                </property>
               </widget>
              </item>
+             <item>
+              <widget class="QPushButton" name="quantize_b">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>Quantize</string>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
             </layout>
            </widget>
           </item>
@@ -523,7 +539,7 @@ padding: 6px;</string>
               </widget>
              </item>
              <item row="5" column="0">
-              <widget class="QSlider" name="horizontalSlider_6">
+              <widget class="QSlider" name="quantize_s">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -542,8 +558,14 @@ padding: 6px;</string>
                  <height>0</height>
                 </size>
                </property>
+               <property name="minimum">
+                <number>1</number>
+               </property>
+               <property name="maximum">
+                <number>256</number>
+               </property>
                <property name="value">
-                <number>50</number>
+                <number>256</number>
                </property>
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
@@ -552,7 +574,7 @@ padding: 6px;</string>
                 <enum>QSlider::TicksAbove</enum>
                </property>
                <property name="tickInterval">
-                <number>10</number>
+                <number>32</number>
                </property>
               </widget>
              </item>

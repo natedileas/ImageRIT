@@ -47,6 +47,8 @@ private slots:
 
     void on_pushButton_10_clicked();
 
+    void on_quantize_s_valueChanged(int value);
+
 private:
     Ui::Panel *ui;
     MainWindow *p;
