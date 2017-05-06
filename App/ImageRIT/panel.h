@@ -50,7 +50,6 @@ private slots:
 
     void on_filter_reset_clicked();
 
-    void on_Median_s_valueChanged(int value);
 
 private:
     Ui::Panel *ui;

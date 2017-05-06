@@ -198,8 +198,8 @@ config = {
     },
     "Median": {
         "func": Median,
-        "args":[]
-    }
+        "args": []
+    },
     "lowpass": {
         "func": gaussian,
         "args": []

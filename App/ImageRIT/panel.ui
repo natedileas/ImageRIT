@@ -493,35 +493,10 @@ padding: 6px;</string>
                </property>
               </widget>
              </item>
-             <item row="0" column="2">
-              <widget class="QPushButton" name="circles">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
+             <item row="4" column="0">
+              <widget class="QLabel" name="label_21">
                <property name="text">
-                <string>Detect Circles</string>
-               </property>
-               <property name="checkable">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="2">
-              <widget class="QPushButton" name="Binarize">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="text">
-                <string>Binarize</string>
-               </property>
-               <property name="checkable">
-                <bool>true</bool>
+                <string>High Pass Filter</string>
                </property>
               </widget>
              </item>
@@ -529,13 +504,6 @@ padding: 6px;</string>
               <widget class="QLabel" name="label_18">
                <property name="text">
                 <string>Low Pass</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="label_21">
-               <property name="text">
-                <string>High Pass Filter</string>
                </property>
               </widget>
              </item>
@@ -579,8 +547,8 @@ padding: 6px;</string>
                </property>
               </widget>
              </item>
-             <item row="2" column="2">
-              <widget class="QPushButton" name="pushButton_6">
+             <item row="1" column="2">
+              <widget class="QPushButton" name="Binarize">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                  <horstretch>0</horstretch>
@@ -588,7 +556,17 @@ padding: 6px;</string>
                 </sizepolicy>
                </property>
                <property name="text">
-                <string>Log Polar</string>
+                <string>Binarize</string>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="0">
+              <widget class="QLabel" name="label_9">
+               <property name="text">
+                <string>Quantize</string>
                </property>
               </widget>
              </item>
@@ -620,10 +598,51 @@ padding: 6px;</string>
                </property>
               </widget>
              </item>
-             <item row="8" column="0">
-              <widget class="QLabel" name="label_9">
+             <item row="2" column="2">
+              <widget class="QSlider" name="Median">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimum">
+                <number>1</number>
+               </property>
+               <property name="maximum">
+                <number>12</number>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="tickPosition">
+                <enum>QSlider::TicksAbove</enum>
+               </property>
+               <property name="tickInterval">
+                <number>1</number>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_22">
                <property name="text">
-                <string>Quantize</string>
+                <string>Median Filter</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QPushButton" name="circles">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>Detect Circles</string>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
                </property>
               </widget>
              </item>

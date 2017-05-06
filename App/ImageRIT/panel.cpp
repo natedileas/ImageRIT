@@ -21,6 +21,7 @@ Panel::Panel(QWidget *parent) :
     connect(ui->quantize, SIGNAL(valueChanged(int)), this, SLOT(dial_changed(int)));
     connect(ui->highpass, SIGNAL(valueChanged(int)), this, SLOT(dial_changed(int)));
     connect(ui->lowpass, SIGNAL(valueChanged(int)), this, SLOT(dial_changed(int)));
+    connect(ui->Median, SIGNAL(valueChanged(int)), this, SLOT(dial_changed(int)));
 
     //affine
     connect(ui->rotate, SIGNAL(valueChanged(int)), this, SLOT(affine(int)));
@@ -353,17 +354,6 @@ void Panel::perspective(int value)
     p->client->write(msg);
 }
 
-<<<<<<< HEAD
-void Panel::on_Median_s_valueChanged(int value)
-{
-    if (ui->Median_b->isChecked()){
-        QString send = QString("{\"Median\": [%1]}").arg(QString::number(value));
-        QByteArray msg(send.toUtf8());
-        qDebug() << send;
-
-        p->client->write(msg);
-    }
-=======
 void Panel::on_filter_reset_clicked()
 {
     ui->quantize->setValue(256);
@@ -377,5 +367,9 @@ void Panel::on_filter_reset_clicked()
     ui->lowpass->setValue(1);
     QByteArray msg2(QString("{\"lowpass\": null}").toUtf8());
     p->client->write(msg2);
->>>>>>> 9a4bf5f2df7b8154209e8f49fec220605fc5724b
+
+    ui->Median->setValue(1);
+    QByteArray msg3(QString("{\"Median\": null}").toUtf8());
+    p->client->write(msg3);
+
 }
